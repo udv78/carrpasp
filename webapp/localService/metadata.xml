@@ -1,0 +1,181 @@
+<edmx:Edmx
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData" Version="1.0">
+    <edmx:DataServices
+        xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="2.0">
+        <Schema
+            xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+            xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm" Namespace="CARRPASP.carrpasp">
+            <EntityType Name="SEGMENTType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="512"/>
+                <NavigationProperty Name="SEG_VAL" Relationship="CARRPASP.carrpasp.SEG_VALType" FromRole="SEGMENTPrincipal" ToRole="SEGVALDependent"/>
+            </EntityType>
+            <EntityType Name="SEGVALType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                    <PropertyRef Name="SEGID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="NAME" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="DESCRIPTION" Type="Edm.String" MaxLength="512"/>
+                <Property Name="SEGID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="CODE" Type="Edm.String" MaxLength="32"/>
+                <NavigationProperty Name="SEG_VAL" Relationship="CARRPASP.carrpasp.SEG_VALType" FromRole="SEGVALDependent" ToRole="SEGMENTPrincipal"/>
+            </EntityType>
+            <EntityType Name="CPASPType">
+                <Key>
+                    <PropertyRef Name="NUM"/>
+                </Key>
+                <Property Name="NUM" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="CREATEDT" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="REGDT" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="PRIMPRICE" Type="Edm.Decimal" Precision="12" Scale="2"/>
+                <Property Name="FACTORYN" Type="Edm.String" MaxLength="32"/>
+                <NavigationProperty Name="PASP_VAL" Relationship="CARRPASP.carrpasp.PASP_VALType" FromRole="CPASPPrincipal" ToRole="CPASPVALDependent"/>
+                <NavigationProperty Name="PASP_JUR" Relationship="CARRPASP.carrpasp.PASP_JURType" FromRole="CPASPPrincipal" ToRole="CJURDependent"/>
+                <NavigationProperty Name="PASP_REP" Relationship="CARRPASP.carrpasp.PASP_REPType" FromRole="CPASPPrincipal" ToRole="REPAIRSDependent"/>
+                <NavigationProperty Name="PASP_RUN" Relationship="CARRPASP.carrpasp.PASP_RUNType" FromRole="CPASPPrincipal" ToRole="CRUNDependent"/>
+            </EntityType>
+            <EntityType Name="CPASPVALType">
+                <Key>
+                    <PropertyRef Name="CPASPNUM"/>
+                    <PropertyRef Name="SEGID"/>
+                    <PropertyRef Name="SEGVALID"/>
+                </Key>
+                <Property Name="CPASPNUM" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="SEGID" Type="Edm.Int64" Nullable="false"/>
+                <Property Name="SEGVALID" Type="Edm.Int64" Nullable="false"/>
+                <NavigationProperty Name="PASP_VAL" Relationship="CARRPASP.carrpasp.PASP_VALType" FromRole="CPASPVALDependent" ToRole="CPASPPrincipal"/>
+            </EntityType>
+            <EntityType Name="CJURType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CNUM" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="OWNNAME" Type="Edm.String" Nullable="false" MaxLength="100"/>
+                <Property Name="DTFROM" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="DTTO" Type="Edm.DateTime" sap:display-format="Date"/>
+                <NavigationProperty Name="PASP_JUR" Relationship="CARRPASP.carrpasp.PASP_JURType" FromRole="CJURDependent" ToRole="CPASPPrincipal"/>
+            </EntityType>
+            <EntityType Name="REPAIRSType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CNUM" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="REPTYPE" Type="Edm.String" Nullable="false" MaxLength="255"/>
+                <Property Name="DT" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="SUM" Type="Edm.Decimal" Precision="12" Scale="2"/>
+                <NavigationProperty Name="PASP_REP" Relationship="CARRPASP.carrpasp.PASP_REPType" FromRole="REPAIRSDependent" ToRole="CPASPPrincipal"/>
+            </EntityType>
+            <EntityType Name="CRUNType">
+                <Key>
+                    <PropertyRef Name="ID"/>
+                </Key>
+                <Property Name="ID" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="CNUM" Type="Edm.String" Nullable="false" MaxLength="8"/>
+                <Property Name="DT" Type="Edm.DateTime" sap:display-format="Date"/>
+                <Property Name="PATHLEN" Type="Edm.Decimal" Precision="12" Scale="1"/>
+                <Property Name="CARGO" Type="Edm.Decimal" Precision="10" Scale="2"/>
+                <Property Name="SUM" Type="Edm.Decimal" Precision="12" Scale="2"/>
+                <NavigationProperty Name="PASP_RUN" Relationship="CARRPASP.carrpasp.PASP_RUNType" FromRole="CRUNDependent" ToRole="CPASPPrincipal"/>
+            </EntityType>
+            <Association Name="SEG_VALType">
+                <End Type="CARRPASP.carrpasp.SEGMENTType" Role="SEGMENTPrincipal" Multiplicity="1"/>
+                <End Type="CARRPASP.carrpasp.SEGVALType" Role="SEGVALDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="SEGMENTPrincipal">
+                        <PropertyRef Name="ID"/>
+                    </Principal>
+                    <Dependent Role="SEGVALDependent">
+                        <PropertyRef Name="SEGID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PASP_VALType">
+                <End Type="CARRPASP.carrpasp.CPASPType" Role="CPASPPrincipal" Multiplicity="1"/>
+                <End Type="CARRPASP.carrpasp.CPASPVALType" Role="CPASPVALDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="CPASPPrincipal">
+                        <PropertyRef Name="NUM"/>
+                    </Principal>
+                    <Dependent Role="CPASPVALDependent">
+                        <PropertyRef Name="CPASPNUM"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PASP_JURType">
+                <End Type="CARRPASP.carrpasp.CPASPType" Role="CPASPPrincipal" Multiplicity="1"/>
+                <End Type="CARRPASP.carrpasp.CJURType" Role="CJURDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="CPASPPrincipal">
+                        <PropertyRef Name="NUM"/>
+                    </Principal>
+                    <Dependent Role="CJURDependent">
+                        <PropertyRef Name="CNUM"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PASP_REPType">
+                <End Type="CARRPASP.carrpasp.CPASPType" Role="CPASPPrincipal" Multiplicity="1"/>
+                <End Type="CARRPASP.carrpasp.REPAIRSType" Role="REPAIRSDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="CPASPPrincipal">
+                        <PropertyRef Name="NUM"/>
+                    </Principal>
+                    <Dependent Role="REPAIRSDependent">
+                        <PropertyRef Name="CNUM"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="PASP_RUNType">
+                <End Type="CARRPASP.carrpasp.CPASPType" Role="CPASPPrincipal" Multiplicity="1"/>
+                <End Type="CARRPASP.carrpasp.CRUNType" Role="CRUNDependent" Multiplicity="*"/>
+                <ReferentialConstraint>
+                    <Principal Role="CPASPPrincipal">
+                        <PropertyRef Name="NUM"/>
+                    </Principal>
+                    <Dependent Role="CRUNDependent">
+                        <PropertyRef Name="CNUM"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="carrpasp" m:IsDefaultEntityContainer="true">
+                <EntitySet Name="SEGMENT" EntityType="CARRPASP.carrpasp.SEGMENTType"/>
+                <EntitySet Name="SEGVAL" EntityType="CARRPASP.carrpasp.SEGVALType"/>
+                <EntitySet Name="CPASP" EntityType="CARRPASP.carrpasp.CPASPType"/>
+                <EntitySet Name="CPASPVAL" EntityType="CARRPASP.carrpasp.CPASPVALType"/>
+                <EntitySet Name="CJUR" EntityType="CARRPASP.carrpasp.CJURType"/>
+                <EntitySet Name="REPAIRS" EntityType="CARRPASP.carrpasp.REPAIRSType"/>
+                <EntitySet Name="CRUN" EntityType="CARRPASP.carrpasp.CRUNType"/>
+                <AssociationSet Name="SEG_VAL" Association="CARRPASP.carrpasp.SEG_VALType">
+                    <End Role="SEGMENTPrincipal" EntitySet="SEGMENT"/>
+                    <End Role="SEGVALDependent" EntitySet="SEGVAL"/>
+                </AssociationSet>
+                <AssociationSet Name="PASP_VAL" Association="CARRPASP.carrpasp.PASP_VALType">
+                    <End Role="CPASPPrincipal" EntitySet="CPASP"/>
+                    <End Role="CPASPVALDependent" EntitySet="CPASPVAL"/>
+                </AssociationSet>
+                <AssociationSet Name="PASP_JUR" Association="CARRPASP.carrpasp.PASP_JURType">
+                    <End Role="CPASPPrincipal" EntitySet="CPASP"/>
+                    <End Role="CJURDependent" EntitySet="CJUR"/>
+                </AssociationSet>
+                <AssociationSet Name="PASP_REP" Association="CARRPASP.carrpasp.PASP_REPType">
+                    <End Role="CPASPPrincipal" EntitySet="CPASP"/>
+                    <End Role="REPAIRSDependent" EntitySet="REPAIRS"/>
+                </AssociationSet>
+                <AssociationSet Name="PASP_RUN" Association="CARRPASP.carrpasp.PASP_RUNType">
+                    <End Role="CPASPPrincipal" EntitySet="CPASP"/>
+                    <End Role="CRUNDependent" EntitySet="CRUN"/>
+                </AssociationSet>
+            </EntityContainer>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
