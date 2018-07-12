@@ -30,6 +30,9 @@
 							id="cpaspSegValHeader"
 							title="Сегменты">				
 						</ObjectHeader>
+						<l:VerticalLayout
+							id="cpaspSegVals" class="sapUiContentPadding" width="100%" title="asdfa">
+						</l:VerticalLayout>
 					</IconTabFilter>
 					<IconTabFilter id="repair" text="{i18n>cpaspRepair}">
 					</IconTabFilter>

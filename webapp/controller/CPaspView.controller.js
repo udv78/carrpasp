@@ -2,12 +2,14 @@ sap.ui.define([
 		"carrpasp/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
-		"carrpasp/model/formatter"
+		"carrpasp/model/formatter",
+		"sap/m/Text"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
-		formatter
+		formatter,
+		Text
 	) {
 		"use strict";
 
@@ -78,6 +80,7 @@ sap.ui.define([
 			 */
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
+				this.Num=sObjectId;
 				this.getModel().metadataLoaded().then( function() {
 					var sObjectPath = this.getModel().createKey("CPASP", {
 						NUM :  sObjectId
@@ -114,6 +117,66 @@ sap.ui.define([
 						}
 					}
 				});
+				this._fillSegVals();
+			},
+			
+			_fillSegVals : function() {
+				var header=this.getView().byId("cpaspSegValHeader");
+				header.destroyAttributes();
+				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
+				header.bindAggregation("attributes", {path: "/CPASPVAL",
+				                               parameters: {
+				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
+				                               },
+				                               filters : ofilter,
+					                           factory : function (sId, oContext) {   
+				                var attr= new sap.m.ObjectAttribute("hl_"+sId,{title : "{VAL_SEGMENT/NAME}", text: "{VAL_SEGVAL/NAME}"});
+				                return attr;
+				}});  
+				
+				
+				//var vl=this.getView().byId("cpaspSegVals");
+				/*var l=new Text("idText", {text: "Hello!!!"});
+				vl.addContent(l);*/
+				
+				/*var oModel=this.getModel();
+				oModel.read("/CPASPVAL", {
+										filters : filter,
+										success : function(oData) {
+										  console.log("success");
+										  console.log(oData);
+										},
+										error: function(oEvt) {
+											console.log("error");
+										}
+									});		*/			
+
+				
+/*
+				vl.bindAggregation("content", {path: "/CPASPVAL",
+				                               parameters: {
+				                               		 expand: 'VAL_SEGMENT,VAL_SEGCAL'
+				                               },
+				                               filters : ofilter,
+					                           factory : function (sId, oContext) {   var oRevenue = oContext.getProperty("SEGID");
+				                var segid=new sap.m.Text("segid_"+sId, {
+				                    text: {
+				                        path: "VAL_SEGMENT/NAME",
+				                        type: new sap.ui.model.type.String()
+				                    }
+				                });
+				                var segvalid=new sap.m.Text("segvalid_"+sId, {
+				                    text: {
+				                        path: "VAL_SEGCAL/NAME",
+				                        type: new sap.ui.model.type.String()
+				                    }
+				                });
+				                var hl= new sap.ui.layout.HorizontalLayout("hl_"+sId,{});
+				                hl.addContent(segid);
+				                hl.addContent(segvalid);
+				                return hl;
+				}});  
+	*/			
 			},
 
 			_onBindingChange : function () {
