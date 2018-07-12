@@ -120,7 +120,7 @@ sap.ui.define([
 				this._fillSegVals();
 			},
 			
-			_fillSegVals : function() {
+			_fillSegVals : function() { 
 				var header=this.getView().byId("cpaspSegValHeader");
 				header.destroyAttributes();
 				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
