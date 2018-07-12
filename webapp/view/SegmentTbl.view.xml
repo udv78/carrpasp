@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="carrpasp.controller.Master"
+	controllerName="carrpasp.controller.SegmentTbl"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m"
@@ -21,6 +21,11 @@
 						search="onSearch">
 					</SearchField>
 				</contentMiddle>
+				<contentRight>
+					<Button id="addButton" icon="sap-icon://add" press="onAdd" />
+					<Button id="updButton" icon="sap-icon://edit" press="onUpd" />
+					<Button id="delButton" icon="sap-icon://delete" press="onDel" />
+				</contentRight>
 			</Bar>
 		</semantic:subHeader>
 
@@ -64,8 +69,39 @@
 						press="onSelectionChange"
 						title="{NAME}"
 >
+					<attributes>
+						<ObjectAttribute text="{DESCRIPTION}" />
+					</attributes>
+						
 					</ObjectListItem>
 				</items>
+				
+				<dependents>
+			      <Dialog id="editDialog"
+			        title="Редактирование сегмента"
+			        type="Message"
+			        draggable = "true"
+					  >
+			        <VBox renderType="Bare">
+			          <Label text="Наименование" />
+			          <Input id="editName" value="{NAME}" />
+			          <Label text="Описание" />
+			          <Input id="editDescr" value="{DESCRIPTION}" />
+			        </VBox>
+			        <endButton>
+			          <Button
+			            text="Cancel"
+			            press=".onCancelPress"
+			          />
+			        </endButton>
+			        <beginButton>
+			          <Button
+			            text="OK"
+			            press=".onOkPress"
+			          />
+			        </beginButton>
+			      </Dialog>
+			    </dependents>				
 			</List>
 		</semantic:content>
 

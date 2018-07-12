@@ -1,0 +1,27 @@
+<mvc:View controllerName="carrpasp.controller.Menu"
+	xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page
+		showHeader="false"
+		enableScrolling="false" >
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Паспорты вагонов"
+		 subheader="Паспорты и учетная информация" press="pressCarrpasp">
+		<tileContent>
+			<TileContent>
+				<content>
+					<ImageContent src="sap-icon://passenger-train" />
+				</content>
+			</TileContent>
+		</tileContent>
+	</GenericTile>
+
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Сегменты"
+		subheader="Сегменты и значения сегментов" press="pressSegment">
+		<tileContent>
+			<TileContent>
+				<content>
+					<ImageContent src="sap-icon://database" />
+				</content>
+			</TileContent>
+		</tileContent>
+	</GenericTile>
+	</Page></mvc:View>

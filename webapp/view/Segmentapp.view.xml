@@ -1,0 +1,16 @@
+ <mvc:View
+	controllerName="carrpasp.controller.Segmentapp"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	busy="{appView>/busy}"
+	busyIndicatorDelay="{appView>/delay}"
+	xmlns="sap.m">
+	<SplitApp id="idAppControl" >
+				<masterPages>
+			<mvc:XMLView viewName="carrpasp.view.SegmentTbl"/>
+		</masterPages>
+		<detailPages>
+			<mvc:XMLView viewName="carrpasp.view.SegvalTbl"/>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

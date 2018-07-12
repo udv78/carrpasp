@@ -1,0 +1,107 @@
+<mvc:View
+	controllerName="carrpasp.controller.SegvalTbl"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+
+	<semantic:DetailPage
+		id="page"
+		navButtonPress="onNavBack"
+		showNavButton="{device>/system/phone}"
+		title="{i18n>detailTitle}"
+		busy="{detailView>/busy}"
+		busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader
+				id="objectHeader"
+				title="{NAME}">			
+				<attributes>
+					<ObjectAttribute text="{DESCRIPTION}" />
+				</attributes>
+			</ObjectHeader>
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="SEGVALType" search="onFilter"
+			  visibleInAdvancedArea="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="CODE" visibleInAdvancedArea="true" />
+					<smartFilterBar:ControlConfiguration key="NAME" visibleInAdvancedArea="true" />
+				</smartFilterBar:controlConfiguration>					
+				
+			</smartFilterBar:SmartFilterBar>
+			<Table
+				id="lineItemsList"
+				width="auto"
+				items="{SEG_VAL}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>detailLineItemTableNoDataText}"
+				busyIndicatorDelay="{detailView>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin"
+				>
+				
+				<headerToolbar>
+					<Toolbar id="lineItemsToolbar">
+						<Title
+							id="lineItemsHeader"
+							text="{detailView>/lineItemListTitle}"/>
+						<ToolbarSpacer />
+					<Button id="addButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
+					<Button id="updButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
+					<Button id="delButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>detailLineItemTableIDColumn}"/>
+					</Column>
+					<Column
+						minScreenWidth="Tablet"
+						demandPopin="true"
+						hAlign="Right">
+						<Text text="{i18n>detailLineItemTableUnitNumberColumn}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press=".onLineSelect">
+						<cells>
+							<ObjectIdentifier
+								title="{NAME}"
+								text="{CODE}"/>
+							<Text text="{DESCRIPTION}"/>
+
+						</cells>
+					</ColumnListItem>
+				</items>
+				<dependents>
+			      <Dialog id="editDialog"
+			        title="Редактирование значения сегмента"
+			        type="Message"
+			        draggable = "true"
+					  >
+			        <VBox renderType="Bare">
+			          <Label text="Наименование" />
+			          <Input id="editName" value="{NAME}" />
+			          <Label text="Код" />
+			          <Input id="editCode" value="{CODE}" />
+			          <Label text="Описание" />
+			          <Input id="editDescr" value="{DESCRIPTION}" />
+			        </VBox>
+			        <endButton>
+			          <Button
+			            text="Cancel"
+			            press=".onCancelPress"
+			          />
+			        </endButton>
+			        <beginButton>
+			          <Button
+			            text="OK"
+			            press=".onOkPress"
+			          />
+			        </beginButton>
+			      </Dialog>
+			    </dependents>				
+			</Table>
+		</semantic:content>
+
+	</semantic:DetailPage>
+
+</mvc:View>

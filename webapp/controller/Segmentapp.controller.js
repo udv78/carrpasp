@@ -4,7 +4,7 @@ sap.ui.define([
 	], function (BaseController, JSONModel) {
 		"use strict";
 
-		return BaseController.extend("carrpasp.controller.App", {
+		return BaseController.extend("carrpasp.controller.Segmentapp", {
 
 			onInit : function () {
 				var oViewModel,
@@ -28,12 +28,14 @@ sap.ui.define([
 
 				// Makes sure that master view is hidden in split app
 				// after a new list entry has been selected.
-				/*oListSelector.attachListSelectionChange(function () {
+				oListSelector.attachListSelectionChange(function () {
 					this.byId("idAppControl").hideMaster();
-				}, this);*/
+				}, this);
 
 				// apply content density mode to root view
 				this.getView().addStyleClass(this.getOwnerComponent().getContentDensityClass());
+				
+				this.getRouter().navTo("segmentTbl", {}, true);
 			}
 
 		});

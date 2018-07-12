@@ -21,16 +21,10 @@
     "/webapp/view/NotFound.view.xml": {
       "entitySet": "UNBINDKEY"
     },
-    "/webapp/view/DetailObjectNotFound.view.xml": {
-      "entitySet": "UNBINDKEY"
-    },
-    "/webapp/view/DetailNoObjectsAvailable.view.xml": {
-      "entitySet": "UNBINDKEY"
-    },
-    "/webapp/view/Master.view.xml": {
+    "/webapp/view/SegmentTbl.view.xml": {
       "entitySet": "SEGMENT"
     },
-    "/webapp/view/Detail.view.xml": {
+    "/webapp/view/SegvalTbl.view.xml": {
       "entitySet": "SEGMENT"
     }
   },
