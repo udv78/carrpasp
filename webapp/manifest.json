@@ -150,6 +150,20 @@
 						"segmentTbl",
 						"segvalTbl"
 					]
+				},
+				{
+					"pattern": "cpaspTbl",
+					"name": "cpaspTbl",
+					"target": [
+						"cpaspTbl"
+					]
+				},
+				{
+					"pattern": "CPASP/{objectId}",
+					"name": "cpaspView",
+					"target": [
+						"cpaspView"
+					]
 				}
 			],
 			"targets": {
@@ -166,7 +180,7 @@
 				},
 				"segmentTbl": {
 					"viewName": "SegmentTbl",
-					"viewLevel": 1,
+					"viewLevel": 2,
 					"viewId": "segmentTbl",
 					"controlAggregation": "masterPages"
 				
@@ -174,12 +188,22 @@
 				"segvalTbl": {
 					"viewName": "SegvalTbl",
 					"viewId": "segvalTbl",
-					"viewLevel": 2,
+					"viewLevel": 3,
 					"controlAggregation": "detailPages"
 				},
 				"notFound": {
 					"viewName": "NotFound",
 					"viewId": "notFound"
+				},
+				"cpaspTbl": {
+					"viewName": "CPaspTbl",
+					"viewId": "CPaspTbl",
+					"viewLevel": 1
+				},
+				"cpaspView": {
+					"viewName": "CPaspView",
+					"viewId": "CPaspView",
+					"viewLevel": 2
 				}
 			}
 		}

@@ -47,6 +47,21 @@
 			<Annotations Target="CARRPASP.carrpasp.SEGVALType">
 				<Annotation Term="Common.Label" String="{@i18n&gt;detailTitle}"/>
 			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/CREATEDT">
+				<Annotation Term="Common.Label" String="{@i18n&gt;CPASPCREATEDT}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/FACTORYN">
+				<Annotation Term="Common.Label" String="{@i18n&gt;CPASPFACTORYN}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/NUM">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cpaspNum}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/PRIMPRICE">
+				<Annotation Term="Common.Label" String="{@i18n&gt;CPASPPRIMEPRICE}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/REGDT">
+				<Annotation Term="Common.Label" String="{@i18n&gt;CPASPREGDT}"/>
+			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

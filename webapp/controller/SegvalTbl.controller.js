@@ -110,6 +110,7 @@ sap.ui.define([
 		    },
 		
 		    onOkPress: function() {
+		      debugger;
 		      this.byId("editDialog").close();
 		      this.getModel().submitChanges();
 		    },
@@ -128,12 +129,14 @@ sap.ui.define([
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
 				this.masterId = sObjectId;
-				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("SEGMENT", {
-						ID :  sObjectId
-					});
-					this._bindView("/" + sObjectPath);
-				}.bind(this));
+				if (this.getModel()) {
+					this.getModel().metadataLoaded().then( function() {
+						var sObjectPath = this.getModel().createKey("SEGMENT", {
+							ID :  sObjectId
+						});
+						this._bindView("/" + sObjectPath);
+					}.bind(this));
+				}
 			},
 
 			/**

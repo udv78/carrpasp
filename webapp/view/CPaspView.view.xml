@@ -1,0 +1,44 @@
+<mvc:View xmlns = "sap.m" 
+  xmlns:mvc = "sap.ui.core.mvc"
+  xmlns:core = "sap.ui.core"
+  xmlns:l = "sap.ui.layout"
+  xmlns:f = "sap.ui.layout.form"
+  controllerName = "carrpasp.controller.CPaspView"
+  xmlns:semantic="sap.m.semantic">
+	<semantic:FullscreenPage id="page" semanticRuleSet="Optimized" title="{i18n>cpaspViewTitle}" >
+		<semantic:content>
+			<IconTabBar id="idTopLevelIconTabBar" class = "sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter id="general" text="{i18n>cpaspGeneral}">
+						<ObjectHeader
+							id="cpaspHeader"
+							title="{NUM}">				
+							<attributes>
+								<ObjectAttribute title="{i18n>cpaspCreatedt}" text="{path:'CREATEDT', type:'sap.ui.model.type.Date'}" />
+							</attributes>
+							<attributes>
+								<ObjectAttribute title="{i18n>cpaspRegdt}" text="{path:'REGDT', type:'sap.ui.model.type.Date'}" />
+							</attributes>
+							<attributes>
+								<ObjectAttribute title="{i18n>cpaspPrimeprice}" text="{PRIMPRICE}" />
+							</attributes>
+							<attributes>
+								<ObjectAttribute title="{i18n>cpaspFactoryn}" text="{FACTORYN}" />
+							</attributes>
+						</ObjectHeader>
+						<ObjectHeader
+							id="cpaspSegValHeader"
+							title="Сегменты">				
+						</ObjectHeader>
+					</IconTabFilter>
+					<IconTabFilter id="repair" text="{i18n>cpaspRepair}">
+					</IconTabFilter>
+					<IconTabFilter id="run" text="{i18n>cpaspRun}">
+					</IconTabFilter>
+					<IconTabFilter id="jur" text="{i18n>cpaspJur}">
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>
