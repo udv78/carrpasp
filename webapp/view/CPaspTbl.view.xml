@@ -4,7 +4,11 @@
     xmlns:semantic="sap.m.semantic"
 	controllerName="carrpasp.controller.CPaspTbl" 
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
-	<semantic:FullscreenPage id="page" semanticRuleSet="Optimized" title="{i18n>cpaspTableTitle}">
+	<semantic:FullscreenPage id="page" 
+	          semanticRuleSet="Optimized" 
+	          title="{i18n>cpaspTableTitle}"
+	          navButtonPress="onNavBack"
+			  showNavButton="true">
 		<semantic:content>
 		<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="CPASPType" search="onFilter">
 		</smartFilterBar:SmartFilterBar>

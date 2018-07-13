@@ -81,12 +81,14 @@ sap.ui.define([
 			_onObjectMatched : function (oEvent) {
 				var sObjectId =  oEvent.getParameter("arguments").objectId;
 				this.Num=sObjectId;
-				this.getModel().metadataLoaded().then( function() {
-					var sObjectPath = this.getModel().createKey("CPASP", {
-						NUM :  sObjectId
-					});
-					this._bindView("/" + sObjectPath);
-				}.bind(this));
+				if (this.getModel()) {
+					this.getModel().metadataLoaded().then( function() {
+						var sObjectPath = this.getModel().createKey("CPASP", {
+							NUM :  sObjectId
+						});
+						this._bindView("/" + sObjectPath);
+					}.bind(this));
+				}
 			},
 
 			/**

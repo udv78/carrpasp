@@ -204,7 +204,12 @@
 					"viewName": "CPaspView",
 					"viewId": "CPaspView",
 					"viewLevel": 2
-				}
+				},
+				"repairTbl": {
+					"viewName": "RepairTbl",
+					"viewId": "RepairTbl",
+					"viewLevel": 3
+				}			
 			}
 		}
 	}

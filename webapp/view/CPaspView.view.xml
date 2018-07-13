@@ -5,7 +5,11 @@
   xmlns:f = "sap.ui.layout.form"
   controllerName = "carrpasp.controller.CPaspView"
   xmlns:semantic="sap.m.semantic">
-	<semantic:FullscreenPage id="page" semanticRuleSet="Optimized" title="{i18n>cpaspViewTitle}" >
+	<semantic:FullscreenPage id="page" 
+	    semanticRuleSet="Optimized" 
+	    title="{i18n>cpaspViewTitle}" 
+		navButtonPress="onNavBack"
+		showNavButton="true">
 		<semantic:content>
 			<IconTabBar id="idTopLevelIconTabBar" class = "sapUiResponsiveContentPadding">
 				<items>
@@ -30,11 +34,9 @@
 							id="cpaspSegValHeader"
 							title="Сегменты">				
 						</ObjectHeader>
-						<l:VerticalLayout
-							id="cpaspSegVals" class="sapUiContentPadding" width="100%" title="asdfa">
-						</l:VerticalLayout>
 					</IconTabFilter>
 					<IconTabFilter id="repair" text="{i18n>cpaspRepair}">
+						<mvc:XMLView viewName="carrpasp.view.RepairTbl"/>
 					</IconTabFilter>
 					<IconTabFilter id="run" text="{i18n>cpaspRun}">
 					</IconTabFilter>
