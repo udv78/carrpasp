@@ -209,7 +209,17 @@
 					"viewName": "RepairTbl",
 					"viewId": "RepairTbl",
 					"viewLevel": 3
-				}			
+				},
+				"crunTbl": {
+					"viewName": "CrunTbl",
+					"viewId": "CrunTbl",
+					"viewLevel": 3
+				},
+				"cjurTbl": {
+					"viewName": "CjurTbl",
+					"viewId": "CjurTbl",
+					"viewLevel": 3
+				}				
 			}
 		}
 	}

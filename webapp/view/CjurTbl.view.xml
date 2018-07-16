@@ -1,0 +1,98 @@
+<mvc:View
+	controllerName="carrpasp.controller.CjurTbl"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+
+	<Panel
+		id="cjurpage"
+		busy="{crunTbl>/busy}"
+		busyIndicatorDelay="{crunTbl>/delay}"
+		width="100%">
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="CJURType" search="onFilter"
+			  visibleInAdvancedArea="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="OWNNAME" visibleInAdvancedArea="true" />
+				</smartFilterBar:controlConfiguration>					
+				
+			</smartFilterBar:SmartFilterBar>
+			<Table
+				id="cjurItemsList"
+				width="auto"
+				items="{PASP_JUR}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>cjurNoData}"
+				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin"
+				>
+				
+				<headerToolbar>
+					<Toolbar id="cjurItemsToolbar">
+						<Title
+							id="cjurItemsHeader"
+							text="{i18n>cjurTblTitle}"/>
+						<ToolbarSpacer />
+					<Button id="cjurAddButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
+					<Button id="cjurUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
+					<Button id="cjurDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>cjurOwnName}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>cjurDtFrom}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>cjurDtTo}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press=".onLineSelect">
+						<cells>
+							<Text text="{path:'OWNNAME'}"/>
+							<Text text="{path:'DTFROM', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy'}"/>
+							<Text text="{path:'DTTO', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<dependents>
+			      <Dialog id="cjurDialog"
+			        title="Юридическая история"
+			        type="Message"
+			        draggable = "true"
+					  >
+			        <VBox renderType="Bare">
+			          <Label text="{i18n>cjurOwnName}" />
+			          <Input id="editOwnName" value="{path: 'OWNNAME'}" />
+			          <Label text="{i18n>cjurDtFrom}" />
+			          <DatePicker id="editDtFrom" 
+			           value="{path:'DTFROM', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy',
+			             formatOptions: { style: 'short'}}"
+			             change="handleChange"/>
+			          <DatePicker id="editDtTo" 
+			           value="{path:'DTTO', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy',
+			             formatOptions: { style: 'short'}}"
+			             change="handleChange"/>
+			        </VBox>
+			        <endButton>
+			          <Button
+			            text="Отмена"
+			            press=".onCancelPress"
+			          />
+			        </endButton>
+			        <beginButton>
+			          <Button
+			            text="OK"
+			            press=".onOkPress"
+			          />
+			        </beginButton>
+			      </Dialog>
+			    </dependents>				
+			</Table>
+	</Panel>
+
+</mvc:View>

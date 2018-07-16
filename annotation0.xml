@@ -83,6 +83,45 @@
 			<Annotations Target="CARRPASP.carrpasp.CPASPType">
 				<Annotation Term="Common.Label" String="{@i18n&gt;cpaspViewTitle}"/>
 			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType">
+				<Annotation Term="Common.Label" String="{@i18n&gt;crunTblTitle}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/CARGO">
+				<Annotation Term="Common.Label" String="{@i18n&gt;crunCargo}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/CNUM">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/DT">
+				<Annotation Term="Common.Label" String="{@i18n&gt;crunDt}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/ID">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/PATHLEN">
+				<Annotation Term="Common.Label" String="{@i18n&gt;crunPathlen}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CRUNType/SUM">
+				<Annotation Term="Common.Label" String="{@i18n&gt;crunSum}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cjurTblTitle}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType/CNUM">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType/DTFROM">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cjurDtFrom}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType/DTTO">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cjurDtTo}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType/ID">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CJURType/OWNNAME">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cjurOwnName}"/>
+			</Annotations>
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

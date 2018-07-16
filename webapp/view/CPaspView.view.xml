@@ -39,8 +39,10 @@
 						<mvc:XMLView viewName="carrpasp.view.RepairTbl"/>
 					</IconTabFilter>
 					<IconTabFilter id="run" text="{i18n>cpaspRun}">
+						<mvc:XMLView viewName="carrpasp.view.CrunTbl"/>
 					</IconTabFilter>
 					<IconTabFilter id="jur" text="{i18n>cpaspJur}">
+						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>

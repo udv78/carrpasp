@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="carrpasp.controller.RepairTbl"
+	controllerName="carrpasp.controller.CrunTbl"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
@@ -7,80 +7,79 @@
 	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
 
 	<Panel
-		id="page"
+		id="crunpage"
 		busy="{crunTbl>/busy}"
 		busyIndicatorDelay="{crunTbl>/delay}"
 		width="100%">
-			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="REPAIRSType" search="onFilter"
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="CRUNType" search="onFilter"
 			  visibleInAdvancedArea="true">
 				<smartFilterBar:controlConfiguration>
-					<smartFilterBar:ControlConfiguration key="REPTYPE" visibleInAdvancedArea="true" />
 					<smartFilterBar:ControlConfiguration key="DT" visibleInAdvancedArea="true" />
 				</smartFilterBar:controlConfiguration>					
 				
 			</smartFilterBar:SmartFilterBar>
 			<Table
-				id="repairItemsList"
+				id="crunItemsList"
 				width="auto"
-				items="{PASP_REP}"
+				items="{PASP_RUN}"
 				updateFinished="onListUpdateFinished"
-				noDataText="{i18n>repairNoData}"
+				noDataText="{i18n>crunNoData}"
 				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"
 				class="sapUiResponsiveMargin"
 				>
 				
 				<headerToolbar>
-					<Toolbar id="repairItemsToolbar">
+					<Toolbar id="crunItemsToolbar">
 						<Title
-							id="repairItemsHeader"
-							text="{i18n>repairTblTitle}"/>
+							id="crunItemsHeader"
+							text="{i18n>crunTblTitle}"/>
 						<ToolbarSpacer />
-					<Button id="repairAddButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
-					<Button id="repairUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
-					<Button id="repairDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
+					<Button id="crunAddButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
+					<Button id="crunUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
+					<Button id="crunDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
 					</Toolbar>
 				</headerToolbar>
 				<columns>
 					<Column>
-						<Text text="{i18n>repairReptype}"/>
+						<Text text="{i18n>crunDt}"/>
 					</Column>
 					<Column>
-						<Text text="{i18n>repairDt}"/>
+						<Text text="{i18n>crunPathlen}"/>
 					</Column>
 					<Column>
-						<Text text="{i18n>repairSum}"/>
+						<Text text="{i18n>crunCargo}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>crunSum}"/>
 					</Column>
 				</columns>
 				<items>
 					<ColumnListItem type="Active" press=".onLineSelect">
 						<cells>
-							<Text text="{path: 'REPTYPE', formatter: '.formatter.reptypeValue' }"/>
 							<Text text="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy'}"/>
+							<Text text="{path:'PATHLEN'}"/>
+							<ObjectNumber number="{ path: 'CARGO', formatter: '.formatter.currencyValue' }"/>
 							<ObjectNumber number="{ path: 'SUM', formatter: '.formatter.currencyValue' }"/>
 						</cells>
 					</ColumnListItem>
 				</items>
 				<dependents>
-			      <Dialog id="repairDialog"
-			        title="Данные о ремонте"
+			      <Dialog id="crunDialog"
+			        title="Данные о пробеге"
 			        type="Message"
 			        draggable = "true"
 					  >
 			        <VBox renderType="Bare">
-			          <Label text="{i18n>repairReptype}" />
-			          <Select id="editReptype" selectedKey="{REPTYPE}">
-			        	<items>
-			        	<core:Item key="TO"  text = "ТО" />
-			        	<core:Item key="CRP" text = "Капитальный ремонт" />
-			        	<core:Item key="ERP" text = "Внеплановый ремонт" />
-			        	</items>
-			          </Select>
-			          <Label text="{i18n>repairDt}" />
+			          <Label text="{i18n>crunDt}" />
 			          <DatePicker id="editDt" 
 			           value="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy',
 			             formatOptions: { style: 'short'}}"
 			             change="handleChange"/>
-			          <Label text="{i18n>repairSum}" />
+			          <Label text="{i18n>crunPathlen}" />
+			          <Input id="editPathLen" type="Number" value="{path: 'PATHLEN'}" />
+			          <Label text="{i18n>crunCargo}" />
+			          <Input id="editCargo" type="Number" value="{path: 'CARGO'}" />
+			          <Label text="{i18n>crunSum}" />
 			          <Input id="editSum" type="Number" value="{path: 'SUM'}" />
 			        </VBox>
 			        <endButton>
