@@ -67,6 +67,14 @@ sap.ui.define([
 					this.getRouter().navTo("cpaspTbl", {}, true);
 				}
 			},
+			onUpd: function(oEvent) {
+				var sObjectPath = this.getView().getElementBinding().getPath();
+
+				this.getRouter().navTo("cpaspEdit", {
+					objectId: this.Num
+				});
+			},
+
 
 			/* =========================================================== */
 			/* internal methods                                            */

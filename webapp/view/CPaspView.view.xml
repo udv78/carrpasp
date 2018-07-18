@@ -14,6 +14,11 @@
 			<IconTabBar id="idTopLevelIconTabBar" class = "sapUiResponsiveContentPadding">
 				<items>
 					<IconTabFilter id="general" text="{i18n>cpaspGeneral}">
+						<OverflowToolbar class="sapUiMediumMarginTop">
+							<ToolbarSpacer/>
+							<Button id="cpaspUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить паспорт"/>
+							<Button id="cpaspDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить паспорт"/>
+						</OverflowToolbar>
 						<ObjectHeader
 							id="cpaspHeader"
 							title="{NUM}">				

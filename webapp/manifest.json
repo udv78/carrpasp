@@ -164,6 +164,13 @@
 					"target": [
 						"cpaspView"
 					]
+				},
+				{
+					"pattern": "CPASP_U/{objectId}",
+					"name": "cpaspEdit",
+					"target": [
+						"cpaspEdit"
+					]
 				}
 			],
 			"targets": {
@@ -204,6 +211,11 @@
 					"viewName": "CPaspView",
 					"viewId": "CPaspView",
 					"viewLevel": 2
+				},
+				"cpaspEdit": {
+					"viewName": "CPaspEdit",
+					"viewId": "CPaspEdit",
+					"viewLevel": 3
 				},
 				"repairTbl": {
 					"viewName": "RepairTbl",
