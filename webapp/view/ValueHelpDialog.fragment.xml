@@ -2,8 +2,9 @@
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core">
 	<SelectDialog
+	    binding = "/SEGMENT(1)"
 		id="selectdialog"
-		title="Значения сегмента"
+		title="{NAME}"
 		class="sapUiPopupWithPadding"
 		items="{SEG_VAL}"
 		search="_handleValueHelpSearch"
