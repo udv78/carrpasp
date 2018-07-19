@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+	    binding = "/SEGMENT(1)"
+		id="selectdialog"
+		title="{NAME}"
+		class="sapUiPopupWithPadding"
+		items="{SEG_VAL}"
+		search="_handleValueHelpSearch"
+		confirm="_handleValueHelpClose"
+		cancel="_handleValueHelpClose">
+		<StandardListItem
+			title="{NAME}"
+			description="{ID}" />
+	</SelectDialog>
+</core:FragmentDefinition>

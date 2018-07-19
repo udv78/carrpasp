@@ -1,0 +1,72 @@
+<mvc:View
+	controllerName="carrpasp.controller.CPaspEdit"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic"
+	xmlns="sap.m"
+	xmlns:smartfield="sap.ui.comp.smartfield"
+	xmlns:smartform="sap.ui.comp.smartform">
+	<semantic:FullscreenPage
+		id="page"
+		title="{i18n>cpaspEditTitle}"
+		showNavButton="true"
+		navButtonPress="onNavBack">
+		<semantic:content>
+			<smartform:SmartForm
+				id="form"
+				editable="true"
+				title="{i18n>cpaspDataTitle}"
+				class="sapUiResponsiveMargin"
+				entityType="/CPASPType">
+				<smartform:Group
+					id="formGroup"
+					label="{i18n>cpaspGeneral}">
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numField"
+							value="{NUM}"
+							editable="false"
+							textLabel="{i18n>cpaspNum}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="nameCreateDt"
+							value="{CREATEDT}"
+							textLabel="{i18n>cpaspCreatedt}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numRegDt"
+							value="{REGDT}"
+							textLabel="{i18n>cpaspRegdt}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numPrimPrice"
+							value="{PRIMPRICE}"
+							textLabel="{i18n>cpaspPrimeprice}"/>
+					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numFactoryn"
+							value="{FACTORYN}"
+							textLabel="{i18n>cpaspFactoryn}"/>
+					</smartform:GroupElement>
+				</smartform:Group>
+				<smartform:Group
+					id="editsegGroup"
+					label="{i18n>cpaspSegVals}">
+					<smartform:GroupElement id="editsegGroupElement">
+						<Text id="ss1" text="text1"/>
+						<Text id="ss2" text="{NUM}"/>
+					</smartform:GroupElement>
+				</smartform:Group>
+			</smartform:SmartForm>
+		</semantic:content>	
+		<semantic:saveAction>
+			<semantic:SaveAction id="save" press="onSave"/>
+		</semantic:saveAction>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>		
+	</semantic:FullscreenPage>
+</mvc:View>

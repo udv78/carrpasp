@@ -1,0 +1,102 @@
+<mvc:View
+	controllerName="carrpasp.controller.CrunTbl"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+
+	<Panel
+		id="crunpage"
+		busy="{crunTbl>/busy}"
+		busyIndicatorDelay="{crunTbl>/delay}"
+		width="100%">
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="CRUNType" search="onFilter"
+			  visibleInAdvancedArea="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="DT" visibleInAdvancedArea="true" />
+				</smartFilterBar:controlConfiguration>					
+				
+			</smartFilterBar:SmartFilterBar>
+			<Table
+				id="crunItemsList"
+				width="auto"
+				items="{PASP_RUN}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>crunNoData}"
+				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin"
+				>
+				
+				<headerToolbar>
+					<Toolbar id="crunItemsToolbar">
+						<Title
+							id="crunItemsHeader"
+							text="{i18n>crunTblTitle}"/>
+						<ToolbarSpacer />
+					<Button id="crunAddButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
+					<Button id="crunUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
+					<Button id="crunDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>crunDt}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>crunPathlen}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>crunCargo}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>crunSum}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press=".onLineSelect">
+						<cells>
+							<Text text="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy'}"/>
+							<Text text="{path:'PATHLEN'}"/>
+							<ObjectNumber number="{ path: 'CARGO', formatter: '.formatter.currencyValue' }"/>
+							<ObjectNumber number="{ path: 'SUM', formatter: '.formatter.currencyValue' }"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<dependents>
+			      <Dialog id="crunDialog"
+			        title="Данные о пробеге"
+			        type="Message"
+			        draggable = "true"
+					  >
+			        <VBox renderType="Bare">
+			          <Label text="{i18n>crunDt}" />
+			          <DatePicker id="editDt" 
+			           value="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy',
+			             formatOptions: { style: 'short'}}"
+			             change="handleChange"/>
+			          <Label text="{i18n>crunPathlen}" />
+			          <Input id="editPathLen" type="Number" value="{path: 'PATHLEN'}" />
+			          <Label text="{i18n>crunCargo}" />
+			          <Input id="editCargo" type="Number" value="{path: 'CARGO'}" />
+			          <Label text="{i18n>crunSum}" />
+			          <Input id="editSum" type="Number" value="{path: 'SUM'}" />
+			        </VBox>
+			        <endButton>
+			          <Button
+			            text="Отмена"
+			            press=".onCancelPress"
+			          />
+			        </endButton>
+			        <beginButton>
+			          <Button
+			            text="OK"
+			            press=".onOkPress"
+			          />
+			        </beginButton>
+			      </Dialog>
+			    </dependents>				
+			</Table>
+	</Panel>
+
+</mvc:View>

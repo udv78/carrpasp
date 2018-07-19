@@ -6,7 +6,7 @@ sap.ui.define(["carrpasp/controller/BaseController",
 
 	var PageController = BaseController.extend("carrpasp.controller.Menu", {
 		pressCarrpasp : function(evt) {
-				this.getRouter().navTo("carrpasp");
+				this.getRouter().navTo("cpaspTbl");
 		},
 		pressSegment : function(evt) {
 				this.getRouter().navTo("Segmentapp");

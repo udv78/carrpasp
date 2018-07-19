@@ -1,0 +1,85 @@
+<mvc:View 
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:semantic="sap.m.semantic"
+	controllerName="carrpasp.controller.CPaspTbl" 
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+	<semantic:FullscreenPage id="page" 
+	          semanticRuleSet="Optimized" 
+	          title="{i18n>cpaspTableTitle}"
+	          navButtonPress="onNavBack"
+			  showNavButton="true">
+		<semantic:content>
+		<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="CPASPType" search="onFilter">
+		</smartFilterBar:SmartFilterBar>
+			
+		<Table id="table" width="auto"
+			items="{ path: '/CPASP', sorter: { path: 'NUM', descending: false } }"
+			noDataText="{i18n>cpaspNoData}" busyIndicatorDelay="{cpaspView>/tableBusyDelay}" growing="true" growingScrollToLoad="true"
+			updateFinished="onUpdateFinished">
+			<headerToolbar>
+				<Toolbar>
+					<Title id="tableHeader" text="{worklistView>/cpaspTableTitle}"/>
+					<ToolbarSpacer/>
+					<SearchField id="searchField" tooltip="{i18n>cpasptSearchTooltip}" search="onSearch" width="auto"></SearchField>
+					<Button id="addButton" icon="sap-icon://add" press="onAdd"/>
+				</Toolbar>
+			</headerToolbar>
+			<columns>
+				<Column id="numColumn">
+					<Text text="{i18n>cpaspNum}" id="numColumnTitle"/>
+				</Column>
+				<Column id="createdtColumn" demandPopin="true" minScreenWidth="Tablet">
+					<Text text="{i18n>cpaspCreatedt}"/>
+				</Column>
+				<Column id="regdtColumn" demandPopin="false" minScreenWidth="Tablet">
+					<Text text="{i18n>cpaspRegdt}"/>
+				</Column>
+				<Column id="primepriceColumn" hAlign="End">
+					<Text text="{i18n>cpaspPrimeprice}"/>
+				</Column>
+				<Column id="factorynColumn" hAlign="End">
+					<Text text="{i18n>cpaspFactoryn}"/>
+				</Column>
+			</columns>
+			<items>
+				<ColumnListItem type="Navigation" press="onPress">
+					<cells>
+						<ObjectIdentifier title="{NUM}" titleActive="true" titlePress="onShowCpaspPopover"/>
+						<Text text="{path:'CREATEDT', type:'sap.ui.model.type.Date'}"/>
+						<Text text="{path:'REGDT', type:'sap.ui.model.type.Date'}"/>
+						<ObjectNumber number="{ path: 'PRIMPRICE', formatter: '.formatter.currencyValue' }"/>
+						<Text text="{FACTORYN}"/>
+					</cells>
+				</ColumnListItem>
+			</items>
+
+			<dependents>
+		      <Dialog id="addDialog"
+		        title="Добавление паспорта"
+		        type="Message"
+		        draggable = "true"
+				  >
+		        <VBox renderType="Bare">
+		          <Label text="Номер вагона" />
+		          <Input id="editNum" value="{NUM}" maxLength="8" required="true" />
+		        </VBox>
+		        <endButton>
+		          <Button
+		            text="Отмена"
+		            press=".onCancelPress"
+		          />
+		        </endButton>
+		        <beginButton>
+		          <Button
+		            text="Добавить"
+		            press=".onOkPress"
+		          />
+		        </beginButton>
+		      </Dialog>
+		    </dependents>				
+		</Table>		
+		
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

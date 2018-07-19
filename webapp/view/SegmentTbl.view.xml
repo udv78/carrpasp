@@ -90,7 +90,7 @@
 			        </VBox>
 			        <endButton>
 			          <Button
-			            text="Cancel"
+			            text="Отмена"
 			            press=".onCancelPress"
 			          />
 			        </endButton>

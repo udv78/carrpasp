@@ -1,0 +1,103 @@
+<mvc:View
+	controllerName="carrpasp.controller.RepairTbl"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+
+	<Panel
+		id="page"
+		busy="{crunTbl>/busy}"
+		busyIndicatorDelay="{crunTbl>/delay}"
+		width="100%">
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="REPAIRSType" search="onFilter"
+			  visibleInAdvancedArea="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="REPTYPE" visibleInAdvancedArea="true" />
+					<smartFilterBar:ControlConfiguration key="DT" visibleInAdvancedArea="true" />
+				</smartFilterBar:controlConfiguration>					
+				
+			</smartFilterBar:SmartFilterBar>
+			<Table
+				id="repairItemsList"
+				width="auto"
+				items="{PASP_REP}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>repairNoData}"
+				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin"
+				>
+				
+				<headerToolbar>
+					<Toolbar id="repairItemsToolbar">
+						<Title
+							id="repairItemsHeader"
+							text="{i18n>repairTblTitle}"/>
+						<ToolbarSpacer />
+					<Button id="repairAddButton" icon="sap-icon://add" press="onAdd" tooltip="Добавить" />
+					<Button id="repairUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить"/>
+					<Button id="repairDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>repairReptype}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>repairDt}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>repairSum}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press=".onLineSelect">
+						<cells>
+							<Text text="{path: 'REPTYPE', formatter: '.formatter.reptypeValue' }"/>
+							<Text text="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy'}"/>
+							<ObjectNumber number="{ path: 'SUM', formatter: '.formatter.currencyValue' }"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+				<dependents>
+			      <Dialog id="repairDialog"
+			        title="Данные о ремонте"
+			        type="Message"
+			        draggable = "true"
+					  >
+			        <VBox renderType="Bare">
+			          <Label text="{i18n>repairReptype}" />
+			          <Select id="editReptype" selectedKey="{REPTYPE}">
+			        	<items>
+			        	<core:Item key="TO"  text = "ТО" />
+			        	<core:Item key="CRP" text = "Капитальный ремонт" />
+			        	<core:Item key="ERP" text = "Внеплановый ремонт" />
+			        	</items>
+			          </Select>
+			          <Label text="{i18n>repairDt}" />
+			          <DatePicker id="editDt" 
+			           value="{path:'DT', type:'sap.ui.model.type.Date', pattern: 'dd.MM.yyyy',
+			             formatOptions: { style: 'short'}}"
+			             change="handleChange"/>
+			          <Label text="{i18n>repairSum}" />
+			          <Input id="editSum" type="Number" value="{path: 'SUM'}" />
+			        </VBox>
+			        <endButton>
+			          <Button
+			            text="Отмена"
+			            press=".onCancelPress"
+			          />
+			        </endButton>
+			        <beginButton>
+			          <Button
+			            text="OK"
+			            press=".onOkPress"
+			          />
+			        </beginButton>
+			      </Dialog>
+			    </dependents>				
+			</Table>
+	</Panel>
+
+</mvc:View>

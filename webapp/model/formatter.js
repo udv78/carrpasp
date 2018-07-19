@@ -16,6 +16,19 @@ sap.ui.define([
 				}
 
 				return parseFloat(sValue).toFixed(2);
+			},
+			reptypeValue : function (sValue) {
+				if (!sValue) {
+					return "";
+				}
+				if (sValue=="TO")
+					return "ТО";
+				if (sValue=="CRP")
+					return "Капитальный ремонт";
+				if (sValue=="ERP")
+					return "Внеплановый ремонт";
+
+				return "";
 			}
 		};
 

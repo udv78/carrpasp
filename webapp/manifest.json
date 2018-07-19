@@ -150,6 +150,27 @@
 						"segmentTbl",
 						"segvalTbl"
 					]
+				},
+				{
+					"pattern": "cpaspTbl",
+					"name": "cpaspTbl",
+					"target": [
+						"cpaspTbl"
+					]
+				},
+				{
+					"pattern": "CPASP/{objectId}",
+					"name": "cpaspView",
+					"target": [
+						"cpaspView"
+					]
+				},
+				{
+					"pattern": "CPASP_U/{objectId}",
+					"name": "cpaspEdit",
+					"target": [
+						"cpaspEdit"
+					]
 				}
 			],
 			"targets": {
@@ -166,20 +187,50 @@
 				},
 				"segmentTbl": {
 					"viewName": "SegmentTbl",
-					"viewLevel": 1,
+					"viewLevel": 2,
 					"viewId": "segmentTbl",
 					"controlAggregation": "masterPages"
 				},
 				"segvalTbl": {
 					"viewName": "SegvalTbl",
 					"viewId": "segvalTbl",
-					"viewLevel": 2,
+					"viewLevel": 3,
 					"controlAggregation": "detailPages"
 				},
 				"notFound": {
 					"viewName": "NotFound",
 					"viewId": "notFound"
-				}
+				},
+				"cpaspTbl": {
+					"viewName": "CPaspTbl",
+					"viewId": "CPaspTbl",
+					"viewLevel": 1
+				},
+				"cpaspView": {
+					"viewName": "CPaspView",
+					"viewId": "CPaspView",
+					"viewLevel": 2
+				},
+				"cpaspEdit": {
+					"viewName": "CPaspEdit",
+					"viewId": "CPaspEdit",
+					"viewLevel": 3
+				},
+				"repairTbl": {
+					"viewName": "RepairTbl",
+					"viewId": "RepairTbl",
+					"viewLevel": 3
+				},
+				"crunTbl": {
+					"viewName": "CrunTbl",
+					"viewId": "CrunTbl",
+					"viewLevel": 3
+				},
+				"cjurTbl": {
+					"viewName": "CjurTbl",
+					"viewId": "CjurTbl",
+					"viewLevel": 3
+				}				
 			}
 		}
 	},
