@@ -169,7 +169,6 @@
 					"viewLevel": 1,
 					"viewId": "segmentTbl",
 					"controlAggregation": "masterPages"
-				
 				},
 				"segvalTbl": {
 					"viewName": "SegvalTbl",
@@ -183,5 +182,9 @@
 				}
 			}
 		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
 	}
 }
