@@ -3,13 +3,15 @@ sap.ui.define([
 		"sap/ui/model/json/JSONModel",
 		"sap/ui/core/routing/History",
 		"carrpasp/model/formatter",
-		"sap/m/Text"
+		"sap/m/Text",
+		"sap/m/MessageBox"
 	], function (
 		BaseController,
 		JSONModel,
 		History,
 		formatter,
-		Text
+		Text,
+		MessageBox
 	) {
 		"use strict";
 
@@ -32,7 +34,10 @@ sap.ui.define([
 				var iOriginalBusyDelay,
 					oViewModel = new JSONModel({
 						busy : true,
-						delay : 0
+						delay : 0,
+						repairTblTitle : "Ремонты",
+						crunTblTitle : "Пробеги",
+						cjurTblTitle : "Юридическая история"
 					});
 
 				this.getRouter().getRoute("cpaspView").attachPatternMatched(this._onObjectMatched, this);
@@ -67,9 +72,26 @@ sap.ui.define([
 					this.getRouter().navTo("cpaspTbl", {}, true);
 				}
 			},
+			
+			onDel : function (oEvent) {
+				var path=this.getView().getBindingContext().getPath();
+				var that=this;
+				MessageBox.show(
+					that.getResourceBundle().getText("confirmDeleteText"), {
+						icon: MessageBox.Icon.QUESTION,
+						title: that.getResourceBundle().getText("confirmDeleteTitle"),
+						actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+						onClose: function(sAnswer) {
+							if (sAnswer === MessageBox.Action.YES) {
+								that.getModel().remove(path);
+								that.onNavBack();
+							}
+						}
+					}
+				);					
+			},
+			
 			onUpd: function(oEvent) {
-				var sObjectPath = this.getView().getElementBinding().getPath();
-
 				this.getRouter().navTo("cpaspEdit", {
 					objectId: this.Num
 				});
@@ -145,48 +167,6 @@ sap.ui.define([
 				}});  
 				
 				
-				//var vl=this.getView().byId("cpaspSegVals");
-				/*var l=new Text("idText", {text: "Hello!!!"});
-				vl.addContent(l);*/
-				
-				/*var oModel=this.getModel();
-				oModel.read("/CPASPVAL", {
-										filters : filter,
-										success : function(oData) {
-										  console.log("success");
-										  console.log(oData);
-										},
-										error: function(oEvt) {
-											console.log("error");
-										}
-									});		*/			
-
-				
-/*
-				vl.bindAggregation("content", {path: "/CPASPVAL",
-				                               parameters: {
-				                               		 expand: 'VAL_SEGMENT,VAL_SEGCAL'
-				                               },
-				                               filters : ofilter,
-					                           factory : function (sId, oContext) {   var oRevenue = oContext.getProperty("SEGID");
-				                var segid=new sap.m.Text("segid_"+sId, {
-				                    text: {
-				                        path: "VAL_SEGMENT/NAME",
-				                        type: new sap.ui.model.type.String()
-				                    }
-				                });
-				                var segvalid=new sap.m.Text("segvalid_"+sId, {
-				                    text: {
-				                        path: "VAL_SEGCAL/NAME",
-				                        type: new sap.ui.model.type.String()
-				                    }
-				                });
-				                var hl= new sap.ui.layout.HorizontalLayout("hl_"+sId,{});
-				                hl.addContent(segid);
-				                hl.addContent(segvalid);
-				                return hl;
-				}});  
-	*/			
 			},
 
 			_onBindingChange : function () {
@@ -200,11 +180,6 @@ sap.ui.define([
 					return;
 				}
 
-/*				var oResourceBundle = this.getResourceBundle(),
-					oObject = oView.getBindingContext().getObject(),
-					sObjectId = oObject.ID,
-					sObjectName = oObject.CODE;
-*/
 				// Everything went fine.
 				oViewModel.setProperty("/busy", false);
 			}

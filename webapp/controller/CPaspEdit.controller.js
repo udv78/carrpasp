@@ -31,12 +31,10 @@ sap.ui.define([
 			this.getOwnerComponent().getModel().metadataLoaded().then(function () {
 					// Restore original busy indicator delay for the object view
 					oViewModel.setProperty("/delay", iOriginalBusyDelay);
-					//this.getOwnerComponent().getModel().resetChanges();
+					this.getOwnerComponent().getModel().resetChanges();
 				}
 			);
 			
-			this.fillSegsNum=null;
-
 		},
 
 		/* =========================================================== */
@@ -85,13 +83,20 @@ sap.ui.define([
 				}
 			});
 
-			this.getModel().submitChanges();
+			var that=this;
+			this.getModel().submitChanges({
+				success: function(oData) {
+					that.onNavBack();
+				},
+				error : function(oData) {
+					console.log("save error "+oData);
+				}
+			});
 			
 			/*var sId = this.getView().getBindingContext().getProperty("NUM");
 			this.getRouter().navTo("cpaspView", {
 				objectId : sId
 			}, true);*/
-			this.onNavBack();
 		},		
 
 		/**
@@ -104,17 +109,17 @@ sap.ui.define([
 			//this.getModel().deleteCreatedEntry(this._oContext);
 			this.getModel().resetChanges();
 
-			/*var oHistory = History.getInstance(),
+			var oHistory = History.getInstance(),
 				sPreviousHash = oHistory.getPreviousHash();
 
 			if (sPreviousHash !== undefined) {
 				// The history contains a previous entry
 				history.go(-1);
-			} else {*/
+			} else {
 				// Otherwise we go backwards with a forward history
 				var bReplace = true;
 				this.getRouter().navTo("cpaspView", {objectId : this.Num}, bReplace);
-			//}
+			}
 		},
 		_bindView : function (sObjectPath) {
 			var oViewModel = this.getModel("cpaspEdit"),
@@ -152,7 +157,7 @@ sap.ui.define([
 				oViewModel.setProperty("/busy", false);
 		},
 		
-		_data_received : function(oEvent, that) {
+		_fill_empty_segs : function(oEvent, that) {
 			//var aggregatedData=oEvent.getParameters().data;
 			var aggregatedData=oEvent;
 			var segIds =[];
@@ -183,8 +188,8 @@ sap.ui.define([
 											var oCurContext = oView.contr.getModel().createEntry(/*oView.getBindingContext().getPath()+*/"/CPASPVAL", {
 												properties: oProperties
 											});
-									      	ge.setBindingContext(oCurContext);
-											
+											ge.setBindingContext(oCurContext);
+
 												
 							                var lb = new sap.m.Label('lb_'+item.ID,{text: "{NAME}"});
 							                lb.bindElement({path:"/SEGMENT("+item.ID+")",
@@ -203,7 +208,7 @@ sap.ui.define([
 			                							}
 
 							                });
-							                attr.bindElement({path:"/CPASPVAL("+oProperties.ID+")",
+							                attr.bindElement({path:"/CPASPVAL("+oProperties.ID+"L)",
 							                						events: {
 												        					dataReceived: function(rData) {
 												        						attr.bindProperty("value",{path: "SEGVALID"});	
@@ -256,61 +261,44 @@ sap.ui.define([
 			if (oSelectedItem) {
 				var myInput = sap.ui.getCore().byId(this.inputId),
 					//oText = this.getView().byId('selectedKey'),
-					sDescription = oSelectedItem.getDescription(),
+					sId = oSelectedItem.getDescription(),
 					sTitle = oSelectedItem.getTitle();
 				
 				myInput.getBinding("value").setBindingMode("OneWay");
 				myInput.getBinding("value").sMode="OneWay";
-				var oContext=myInput.getBindingContext();
-				oContext.getModel().setProperty(oContext.getPath()+"/SEGVALID",sDescription);
-				myInput.getBinding("value").setValue(sDescription);
+				var ge=myInput.getParent();
+				var oContext=ge.getBindingContext();
+				oContext.getModel().setProperty(oContext.getPath()+"/SEGVALID",sId);
 
-			//alert("sDescription=" + sDescription+" sTitle=" + sTitle);
-			debugger;
-			
-			  //productInput.setTextFormatMode("Key");
-
-				//myInput.setSelectedKey(sDescription);
 				myInput.setValue(sTitle);
-				//oText.setText(sDescription);
 			}
 			evt.getSource().getBinding("items").filter([]);
 		},
 		
 		_fillSegVals : function() { 
-			if (this.fillSegsNum==this.Num) return;
-			this.fillSegsNum=this.Num;
-			//this.getModel().resetChanges();
 			var group = this.getView().byId("editsegGroup");
 			var oView = this.getView();
 			group.destroyGroupElements();
 			var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
 			var that = this;
 			var oModel=this.getModel();
-			debugger;
+			//debugger;
 			oModel.read("/CPASPVAL", {
 						parameters: {
 			                               		 expand: 'VAL_SEGMENT, VAL_SEGVAL'
 			                               },
 			            filters : ofilter,
 						success : function(oData) {
-						  console.log("success");
-						  console.log(oData);
+						  //console.log("success");
+						  //console.log(oData);
 						  var segs=oData.results;
 						  if (segs && group) {
 						  	segs.forEach(function(item, i, arr) {
                 				oView.segvals.push("segval_"+item.ID);
 				                var sId=item.SEGID;
 				                var ge=new sap.ui.comp.smartform.GroupElement("ge_"+sId);
-				                //var lb = new sap.m.Label('lb_'+sId,{text: "{/SEGMENT("+sId+")/NAME}"});
-				                //var lb = new sap.m.Label('lb_'+sId,{text: "{VAL_SEGMENT/NAME}"});
-				                ge.bindElement({path:"/CPASPVAL("+item.ID+"L)"/*,
-				                						events: {
-									        					dataReceived: function(rData) {
-									        						lb.bindProperty("text",{path: "{/SEGMENT("+sId+")/NAME}"});	
-									        					}
-				                						}*/});
-				                
+				                ge.bindElement({path:"/CPASPVAL("+item.ID+"L)"
+				                						});
 				                var lb = new sap.m.Label('lb_'+sId,{text: "{NAME}"});
 				                lb.bindElement({path:"/CPASPVAL("+item.ID+")/VAL_SEGMENT",
 				                						events: {
@@ -320,7 +308,8 @@ sap.ui.define([
 				                						}
 				                });
 
-				                var inp= new sap.m.Input("segval_"+sId,{value: "{VAL_SEGVAL/NAME}",
+
+				                var inp= new sap.m.Input("segval_"+sId,{/*value: "{VAL_SEGVAL/NAME}",*/
 				                			showValueHelp : true,
 				                			valueHelpOnly : true,
 				                			textFormatMode : "Key",
@@ -328,95 +317,24 @@ sap.ui.define([
 				                				  that.handleValueHelp(oEvent,that);
 				                			}
 				                });
-				                inp.bindElement({path:"/CPASPVAL("+item.ID+")",
+
+				                inp.bindElement({path:"/CPASPVAL("+item.ID+")/VAL_SEGVAL",
 				                						events: {
 									        					dataReceived: function(rData) {
-									        						inp.bindProperty("value",{path: "VAL_SEGVAL/NAME"});	
+									        						inp.bindProperty("value",{path: "NAME"});	
 									        					}
 				                						}
 				                });
-				                /*inp.bindProperty("value","SEGVALID", function(aSprid) {
-											//	alert("formatsprid");
-												console.log("formatsegvalid "+aSprid);
-												if (aSprid) {
-													var oModel=inp.getModel();
-													return oModel.getProperty("/SEGVAL("+aSprid+")/NAME"); 
-												}
-												return aSprid;
-				                			});*/
-				                
-				                ge.addElement(lb);
-				                ge.addElement(inp);
+								ge.addElement(lb);
+   				                ge.addElement(inp);
                 				group.addGroupElement(ge);
 						  	});
 						  }
-						  that._data_received(oData,that);
+						  that._fill_empty_segs(oData,that);
 						}
 			});
-		},			
-
-
-		_fillSegVals2 : function() { 
-			var group = this.getView().byId("editsegGroup");
-			group.destroyGroupElements();
-			var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
-			var that = this;
-			//var ge=this.getView().byId("editsegGroupElement");
-			//var oModel=this.getModel();
-			/*oModel.read("/SEGMENT", {
-									success : function(oData) {
-									ge.bindElement( {path: "/SEGMENT(1)"}
-										);
-									var ed = new sap.m.Input("segv_112",{value: "{NAME}"});
-									ge.addElement(ed);
-									}});
-			return;*/
-			
-			
-			var oModel=this.getModel();
-			/*oModel.read("/CPASPVAL", {
-									filters : ofilter,
-									success : function(oData) {
-									  console.log("success");
-									  console.log(oData);
-									},
-									error: function(oEvt) {
-										console.log("error");
-									}
-								});			*/
-			debugger;
-			group.bindAggregation("groupElements", {path: /*that.getView().getBindingContext().getPath()+*/"/CPASPVAL",
-			                               parameters: {
-			                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
-			                               },
-			                               filters : ofilter,
-			                               events : {
-
-											    dataReceived : function(oEvent) {
-											    	 that._data_received(oEvent,that);
-											    }
-
-											},
-				                           factory : function (sId, oContext) {   
-			                var ge=new sap.ui.comp.smartform.GroupElement("ge_"+sId);
-			                
-			                that.getView().segvals.push("segval_"+oContext.getProperty().SEGID);
-			                
-			                var lb = new sap.m.Label('lb_'+sId,{text: "{VAL_SEGMENT/NAME}"});
-			                var inp= new sap.m.Input("segval_"+oContext.getProperty().SEGID,{value: "{SEGVALID}",
-			                			showValueHelp : true,
-			                			valueHelpOnly : true,
-			                			textFormatMode : "Key",
-			                			valueHelpRequest : function(oEvent) { 
-			                				  that.handleValueHelp(oEvent,that);
-			                			}
-			                });
-			                
-			                ge.addElement(lb);
-			                ge.addElement(inp);
-			                return ge;
-			}});  
 		}			
+
 		});	
 		
 	});

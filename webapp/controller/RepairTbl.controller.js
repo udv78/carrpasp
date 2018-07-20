@@ -1,8 +1,9 @@
 sap.ui.define([
 		"carrpasp/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"carrpasp/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+		"carrpasp/model/formatter",
+		"sap/m/MessageBox"
+	], function (BaseController, JSONModel, formatter, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("carrpasp.controller.RepairTbl", {
@@ -52,11 +53,11 @@ sap.ui.define([
 				// only update the counter if the length is final
 				if (this.byId("repairItemsList").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
-						sTitle = this.getResourceBundle().getText("repairTblTitleCount", [iTotalItems]);
+						sTitle = this.getResourceBundle().getText("cpaspRepair", [iTotalItems]);
 					} else {
-						sTitle = this.getResourceBundle().getText("repairTblTitleCount", [0]);
+						sTitle = this.getResourceBundle().getText("cpaspRepair", [0]);
 					}
-					oViewModel.setProperty("/repairTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/repairTblTitle", sTitle);
 				}
 			},
 			
@@ -113,7 +114,19 @@ sap.ui.define([
 
 				if (this.oCurContext) {
 					var path=this.oCurContext.getPath();
-					this.getModel().remove(path);
+					var that=this;
+					MessageBox.show(
+						that.getResourceBundle().getText("confirmDeleteText"), {
+							icon: MessageBox.Icon.QUESTION,
+							title: that.getResourceBundle().getText("confirmDeleteTitle"),
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							onClose: function(sAnswer) {
+								if (sAnswer === MessageBox.Action.YES) {
+									that.getModel().remove(path);
+								}
+							}
+						}
+					);					
 				}
 			},
 
