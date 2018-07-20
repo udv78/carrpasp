@@ -4,7 +4,9 @@
   xmlns:l = "sap.ui.layout"
   xmlns:f = "sap.ui.layout.form"
   controllerName = "carrpasp.controller.CPaspView"
-  xmlns:semantic="sap.m.semantic">
+  xmlns:semantic="sap.m.semantic"
+  xmlns:smartfield="sap.ui.comp.smartfield"
+  xmlns:smartform="sap.ui.comp.smartform">
 	<semantic:FullscreenPage id="page" 
 	    semanticRuleSet="Optimized" 
 	    title="{i18n>cpaspViewTitle}" 
@@ -19,34 +21,66 @@
 							<Button id="cpaspUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить паспорт"/>
 							<Button id="cpaspDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить паспорт"/>
 						</OverflowToolbar>
-						<ObjectHeader
-							id="cpaspHeader"
-							title="{NUM}">				
-							<attributes>
-								<ObjectAttribute title="{i18n>cpaspCreatedt}" text="{path:'CREATEDT', type:'sap.ui.model.type.Date'}" />
-							</attributes>
-							<attributes>
-								<ObjectAttribute title="{i18n>cpaspRegdt}" text="{path:'REGDT', type:'sap.ui.model.type.Date'}" />
-							</attributes>
-							<attributes>
-								<ObjectAttribute title="{i18n>cpaspPrimeprice}" text="{PRIMPRICE}" />
-							</attributes>
-							<attributes>
-								<ObjectAttribute title="{i18n>cpaspFactoryn}" text="{FACTORYN}" />
-							</attributes>
-						</ObjectHeader>
+						<f:SimpleForm
+							id="page2">
+							<f:content>
+								<smartform:SmartForm
+									id="form2"
+									editable="false"
+									useHorizontalLayout="true"
+									title="{i18n>cpaspDataTitle}"
+									class="sapUiResponsiveMargin"
+									entityType="/CPASPType">
+									<smartform:Group
+										id="formGroup"
+										label="{i18n>cpaspGeneral}">
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="numField"
+												value="{NUM}"
+												textLabel="{i18n>cpaspNum}"
+												/>
+										</smartform:GroupElement>
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="nameCreateDt"
+												value="{CREATEDT}"
+												textLabel="{i18n>cpaspCreatedt}"/>
+										</smartform:GroupElement>
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="numRegDt"
+												value="{REGDT}"
+												textLabel="{i18n>cpaspRegdt}"/>
+										</smartform:GroupElement>
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="numPrimPrice"
+												value="{PRIMPRICE}"
+												textLabel="{i18n>cpaspPrimeprice}"/>
+										</smartform:GroupElement>
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="numFactoryn"
+												value="{FACTORYN}"
+												textLabel="{i18n>cpaspFactoryn}"/>
+										</smartform:GroupElement>
+									</smartform:Group>
+								</smartform:SmartForm>
+							</f:content>	
+							</f:SimpleForm>
 						<ObjectHeader
 							id="cpaspSegValHeader"
 							title="Сегменты">				
 						</ObjectHeader>
 					</IconTabFilter>
-					<IconTabFilter id="repair" text="{i18n>cpaspRepair}">
+					<IconTabFilter id="repair" text="{cpaspView>/repairTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.RepairTbl"/>
 					</IconTabFilter>
-					<IconTabFilter id="run" text="{i18n>cpaspRun}">
+					<IconTabFilter id="run" text="{cpaspView>/crunTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CrunTbl"/>
 					</IconTabFilter>
-					<IconTabFilter id="jur" text="{i18n>cpaspJur}">
+					<IconTabFilter id="jur" text="{cpaspView>/cjurTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
 					</IconTabFilter>
 				</items>

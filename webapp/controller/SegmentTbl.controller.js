@@ -6,8 +6,9 @@ sap.ui.define([
 		"sap/ui/model/FilterOperator",
 		"sap/m/GroupHeaderListItem",
 		"sap/ui/Device",
-		"carrpasp/model/formatter"
-	], function (BaseController, JSONModel, Filter, FilterOperator, GroupHeaderListItem, Device, formatter) {
+		"carrpasp/model/formatter",
+		"sap/m/MessageBox"
+	], function (BaseController, JSONModel, Filter, FilterOperator, GroupHeaderListItem, Device, formatter, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("carrpasp.controller.SegmentTbl", {
@@ -161,7 +162,19 @@ sap.ui.define([
 
 				if (this.oCurContext) {
 					var path=this.oCurContext.getPath();
-					this.getModel().remove(path);
+					var that=this;
+					MessageBox.show(
+						that.getResourceBundle().getText("confirmDeleteText"), {
+							icon: MessageBox.Icon.QUESTION,
+							title: that.getResourceBundle().getText("confirmDeleteTitle"),
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							onClose: function(sAnswer) {
+								if (sAnswer === MessageBox.Action.YES) {
+									that.getModel().remove(path);
+								}
+							}
+						}
+					);					
 				}
 			},
 

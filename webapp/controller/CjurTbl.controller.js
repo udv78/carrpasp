@@ -1,8 +1,9 @@
 sap.ui.define([
 		"carrpasp/controller/BaseController",
 		"sap/ui/model/json/JSONModel",
-		"carrpasp/model/formatter"
-	], function (BaseController, JSONModel, formatter) {
+		"carrpasp/model/formatter",
+		"sap/m/MessageBox"
+	], function (BaseController, JSONModel, formatter, MessageBox) {
 		"use strict";
 
 		return BaseController.extend("carrpasp.controller.CjurTbl", {
@@ -56,7 +57,8 @@ sap.ui.define([
 					} else {
 						sTitle = this.getResourceBundle().getText("cjurTblTitleCount", [0]);
 					}
-					oViewModel.setProperty("/cjurTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/cjurTblTitle", sTitle);
+
 				}
 			},
 			
@@ -113,7 +115,19 @@ sap.ui.define([
 
 				if (this.oCurContext) {
 					var path=this.oCurContext.getPath();
-					this.getModel().remove(path);
+					var that=this;
+					MessageBox.show(
+						that.getResourceBundle().getText("confirmDeleteText"), {
+							icon: MessageBox.Icon.QUESTION,
+							title: that.getResourceBundle().getText("confirmDeleteTitle"),
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							onClose: function(sAnswer) {
+								if (sAnswer === MessageBox.Action.YES) {
+									that.getModel().remove(path);
+								}
+							}
+						}
+					);					
 				}
 			},
 
