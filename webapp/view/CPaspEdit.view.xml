@@ -56,8 +56,6 @@
 					id="editsegGroup"
 					label="{i18n>cpaspSegVals}">
 					<smartform:GroupElement id="editsegGroupElement">
-						<Text id="ss1" text="text1"/>
-						<Text id="ss2" text="{NUM}"/>
 					</smartform:GroupElement>
 				</smartform:Group>
 			</smartform:SmartForm>
