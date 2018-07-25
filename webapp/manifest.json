@@ -30,7 +30,7 @@
 				}
 			},
 			"annotation01": {
-				"uri": "annotations/annotation1.xml",
+				"uri": "annotations/annotation0.xml",
 				"type": "ODataAnnotation",
 				"settings": {
 					"localUri": "annotations/annotation0.xml"
