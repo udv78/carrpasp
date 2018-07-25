@@ -103,15 +103,15 @@ sap.ui.define([
 					var path=this.oCurContext.getPath();
 					var that=this;
 					MessageBox.show(
-						that.getResourceBundle().getText("confirmDeleteText"), {
+						this.getResourceBundle().getText("confirmDeleteText"), {
 							icon: MessageBox.Icon.QUESTION,
-							title: that.getResourceBundle().getText("confirmDeleteTitle"),
+							title: this.getResourceBundle().getText("confirmDeleteTitle"),
 							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 							onClose: function(sAnswer) {
 								if (sAnswer === MessageBox.Action.YES) {
-									that.getModel().remove(path);
+									this.getModel().remove(path);
 								}
-							}
+							}.bind(this)
 						}
 					);					
 				}

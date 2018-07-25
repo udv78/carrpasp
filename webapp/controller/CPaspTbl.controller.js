@@ -126,6 +126,11 @@ sap.ui.define([
 				// The source is the list item that got pressed
 				this._showObject(oEvent.getSource());
 			},
+
+			onChart : function (oEvent) {
+				// The source is the list item that got pressed
+				this.getRouter().navTo("cpaspChart");
+			},
  
 			/*onDelete : function (oEvent) {
 

@@ -83,11 +83,10 @@ sap.ui.define([
 				}
 			});
 
-			var that=this;
 			this.getModel().submitChanges({
 				success: function(oData) {
-					that.onNavBack();
-				},
+					this.onNavBack();
+				}.bind(this),
 				error : function(oData) {
 					console.log("save error "+oData);
 				}
@@ -123,8 +122,7 @@ sap.ui.define([
 		},
 		_bindView : function (sObjectPath) {
 			var oViewModel = this.getModel("cpaspEdit"),
-				oDataModel = this.getModel(),
-				that = this;
+				oDataModel = this.getModel();
 
 			this.getView().bindElement({
 				path: sObjectPath,
@@ -140,13 +138,12 @@ sap.ui.define([
 						});
 					},
 					dataReceived: function () {
-						//that._fillSegVals();
 						oViewModel.setProperty("/busy", false);
 					}
 				}
 			});
 //			debugger;
-//that._fillSegVals();
+
 		},
 		_onBindingChange : function () {
 				var 

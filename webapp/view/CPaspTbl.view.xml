@@ -23,6 +23,7 @@
 					<ToolbarSpacer/>
 					<SearchField id="searchField" tooltip="{i18n>cpasptSearchTooltip}" search="onSearch" width="auto"></SearchField>
 					<Button id="addButton" icon="sap-icon://add" press="onAdd"/>
+					<Button id="chartButton" icon="sap-icon://bar-chart" press="onChart" tooltip="Диаграмма"/>
 				</Toolbar>
 			</headerToolbar>
 			<columns>

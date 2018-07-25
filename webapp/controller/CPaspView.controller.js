@@ -75,18 +75,17 @@ sap.ui.define([
 			
 			onDel : function (oEvent) {
 				var path=this.getView().getBindingContext().getPath();
-				var that=this;
 				MessageBox.show(
-					that.getResourceBundle().getText("confirmDeleteText"), {
+					this.getResourceBundle().getText("confirmDeleteText"), {
 						icon: MessageBox.Icon.QUESTION,
-						title: that.getResourceBundle().getText("confirmDeleteTitle"),
+						title: this.getResourceBundle().getText("confirmDeleteTitle"),
 						actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 						onClose: function(sAnswer) {
 							if (sAnswer === MessageBox.Action.YES) {
-								that.getModel().remove(path);
-								that.onNavBack();
+								this.getModel().remove(path);
+								this.onNavBack();
 							}
-						}
+						}.bind(this)
 					}
 				);					
 			},
