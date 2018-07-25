@@ -30,7 +30,7 @@
 				<Annotation Term="Core.Immutable"/>
 			</Annotations>
 			<Annotations Target="CARRPASP.carrpasp.SEGVALType/CODE">
-				<Annotation Term="Common.Label" String="{@i18n&gt;КОД_ЗНАЧЕНИЯ}"/>
+				<Annotation Term="Common.Label" String="Код значения"/>
 			</Annotations>
 			<Annotations Target="CARRPASP.carrpasp.SEGVALType/NAME">
 				<Annotation Term="Common.Label" String="{@i18n&gt;НАИМЕНОВАНИЕ_ЗНАЧЕНИЯ}"/>

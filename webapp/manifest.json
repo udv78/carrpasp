@@ -171,6 +171,13 @@
 					"target": [
 						"cpaspEdit"
 					]
+				},
+				{
+					"pattern": "cpaspChart",
+					"name": "cpaspChart",
+					"target": [
+						"cpaspChart"
+					]
 				}
 			],
 			"targets": {
@@ -230,7 +237,12 @@
 					"viewName": "CjurTbl",
 					"viewId": "CjurTbl",
 					"viewLevel": 3
-				}				
+				},
+				"cpaspChart": {
+					"viewName": "CPaspChart",
+					"viewId": "CPaspChart",
+					"viewLevel": 2
+				}					
 			}
 		}
 	},
