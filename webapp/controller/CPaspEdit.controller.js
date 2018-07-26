@@ -165,9 +165,10 @@ sap.ui.define([
  		    var oView=that.getView();
  		    oView.segvals=[];
 			oModel.read("/SEGMENT", {
+									sorters : [new sap.ui.model.Sorter("NAME")],
 									success : function(oData) {
-									  console.log("success");
-									  console.log(oData);
+//									  console.log("success");
+//									  console.log(oData);
 									  var segs=oData.results;
 									  if (segs && group) {
 									  	segs.forEach(function(item, i, arr) {
@@ -285,6 +286,7 @@ sap.ui.define([
 			                               		 expand: 'VAL_SEGMENT, VAL_SEGVAL'
 			                               },
 			            filters : ofilter,
+			            sorters : [new sap.ui.model.Sorter("VAL_SEGMENT/NAME")],
 						success : function(oData) {
 						  //console.log("success");
 						  //console.log(oData);

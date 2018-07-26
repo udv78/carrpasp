@@ -66,6 +66,13 @@ sap.ui.define([
 				);
 				this.getRouter().getRoute("segmentTbl").attachPatternMatched(this._onObjectMatched, this);
 				this.getRouter().attachBypassed(this.onBypassed, this);
+				
+				Format.numericFormatter(ChartFormatter.getInstance());
+				var formatPattern = ChartFormatter.DefaultPattern;
+				var oVizFrame = this.getView().byId("idViz");
+				var oPopover = this.getView().byId("idPopover");
+				oPopover.connect(oVizFrame.getVizUid());
+				oPopover.setFormatString(formatPattern.STANDARDFLOAT);
 			},
 			
 			_fillModel : function(segid, segText, mes, vizFrame) {
@@ -124,8 +131,8 @@ sap.ui.define([
 			},
 			
 			_updateViz:function(vizFrame, caption, segText) {
-					//Format.numericFormatter(ChartFormatter.getInstance());
-					//var formatPattern = ChartFormatter.DefaultPattern;
+					Format.numericFormatter(ChartFormatter.getInstance());
+					var formatPattern = ChartFormatter.DefaultPattern;
 					vizFrame.setModel(this.getModel("cpaspChartData"));
 					vizFrame.setVizProperties({
 						plotArea : {
@@ -140,7 +147,8 @@ sap.ui.define([
 						},
 						valueAxis :{
 							label: {
-								visible : true
+								visible : true,
+								formatString: formatPattern.SHORTINTEGER
 								
 							},
 							title: {

@@ -16,7 +16,6 @@
 			  showNavButton="true">
 		<semantic:content>
 		    <l:FixFlex id='chartFixFlex' minFlexSize="250">
-		        <!--Below is the setting panel -->
 		        <l:fixContent>
 		            <Panel id='settingsPanel' class="panelStyle"  expandable="true" expanded="true" headerText="Настройки" width="auto">
 		                <content>
@@ -49,6 +48,7 @@
 		            </Panel>
 		        </l:fixContent>
 		    <l:flexContent>			
+				<viz:Popover id="idPopover"> </viz:Popover>
 				<viz:VizFrame id="idViz" uiConfig="{applicationSet:'fiori'}" vizType="vertical_bullet" height="700px" width="100%">
 	                <viz:dataset>
 	                    <viz.data:FlattenedDataset data="{/cpaspchart}">
@@ -57,14 +57,14 @@
 	                                value="{segValName}" />
 	                        </viz.data:dimensions>
 	                        <viz.data:measures>
-	                            <viz.data:MeasureDefinition name="count"
+	                            <viz.data:MeasureDefinition name="Показатель"
 	                                value="{count}" />
 	                        </viz.data:measures>
 	                    </viz.data:FlattenedDataset>
 	                </viz:dataset>
 	                <viz:feeds>
 	                    <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
-	                        values="count" />
+	                        values="Показатель" />
 	                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
 	                        values="segValName" />
 	                </viz:feeds>				

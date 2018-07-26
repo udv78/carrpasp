@@ -160,6 +160,7 @@ sap.ui.define([
 				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
 				                               },
 				                               filters : ofilter,
+				                               sorter : new sap.ui.model.Sorter("VAL_SEGMENT/NAME"),
 					                           factory : function (sId, oContext) {   
 				                var attr= new sap.m.ObjectAttribute("hl_"+sId,{title : "{VAL_SEGMENT/NAME}", text: "{VAL_SEGVAL/NAME}"});
 				                return attr;

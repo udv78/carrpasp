@@ -4,7 +4,7 @@
 		showHeader="false"
 		enableScrolling="false" >
 	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Паспорты вагонов"
-		 subheader="Паспорты и учетная информация" press="pressCarrpasp">
+		 subheader="Паспорты и учетная информация" press="pressCarrpasp" frameType="TwoByOne">
 		<tileContent>
 			<TileContent>
 				<content>
@@ -15,7 +15,7 @@
 	</GenericTile>
 
 	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Сегменты"
-		subheader="Сегменты и значения сегментов" press="pressSegment">
+		subheader="Сегменты и значения сегментов" press="pressSegment" >
 		<tileContent>
 			<TileContent>
 				<content>
