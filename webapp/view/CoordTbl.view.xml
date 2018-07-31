@@ -1,0 +1,54 @@
+<mvc:View
+	controllerName="carrpasp.controller.CoordTbl"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:semantic="sap.m.semantic"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar">
+
+	<Panel
+		id="page"
+		busy="{coordTbl>/busy}"
+		busyIndicatorDelay="{coordTbl>/delay}"
+		width="100%">
+			<smartFilterBar:SmartFilterBar id="smartFilterBar" entityType="COORDSType" search="onFilter"
+			  visibleInAdvancedArea="true">
+				<smartFilterBar:controlConfiguration>
+					<smartFilterBar:ControlConfiguration key="G_CREATED" visibleInAdvancedArea="true" />
+				</smartFilterBar:controlConfiguration>					
+				
+			</smartFilterBar:SmartFilterBar>
+			<Table
+				id="coordItemsList"
+				width="auto"
+				items="{/COORDS}"
+				updateFinished="onListUpdateFinished"
+				noDataText="{i18n>repairNoData}"
+				busyIndicatorDelay="{coordTbl>/lineItemTableDelay}"
+				class="sapUiResponsiveMargin"
+				>
+				
+				<columns>
+					<Column>
+						<Text text="{i18n>coordCreated}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>coordLatitude}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>coordLongitude}"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem type="Active" press=".onLineSelect">
+						<cells>
+							<Text text="{path: 'G_CREATED', type:'sap.ui.model.type.DateTime', pattern: 'dd.MM.yyyy HH:mm:ss' }"/>
+							<ObjectNumber number="{ path: 'C_LATITUDE', type:'sap.ui.model.type.Float'}"/>
+							<ObjectNumber number="{ path: 'C_LONGITUDE', type:'sap.ui.model.type.Float' }"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+	</Panel>
+
+</mvc:View>

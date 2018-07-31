@@ -37,7 +37,8 @@ sap.ui.define([
 						delay : 0,
 						repairTblTitle : "Ремонты",
 						crunTblTitle : "Пробеги",
-						cjurTblTitle : "Юридическая история"
+						cjurTblTitle : "Юридическая история",
+						coordTblTitle : "Местоположение"
 					});
 
 				this.getRouter().getRoute("cpaspView").attachPatternMatched(this._onObjectMatched, this);

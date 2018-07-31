@@ -238,6 +238,11 @@
 					"viewId": "CjurTbl",
 					"viewLevel": 3
 				},
+				"coordTbl": {
+					"viewName": "CoordTbl",
+					"viewId": "CoordTbl",
+					"viewLevel": 3
+				},
 				"cpaspChart": {
 					"viewName": "CPaspChart",
 					"viewId": "CPaspChart",
