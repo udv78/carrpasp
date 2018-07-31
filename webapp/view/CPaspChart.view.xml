@@ -40,6 +40,10 @@
 								        	<core:Item key="MINUSSUM" text = "Расходы на обслуживание" />
 								        	<core:Item key="PROFIT" text = "Прибыль" />
 								        	<core:Item key="PROFITCARGO" text = "Прибыль на единицу груза" />
+								        	<core:Item key="KM" text = "Километраж" />
+								        	<core:Item key="MINUSKM" text = "Расходы на километр" />
+								        	<core:Item key="PLUSKM" text = "Доход на километр" />
+								        	<core:Item key="PROFITKM" text = "Прибыль на километр" />
 							        	</items>
 			                         </Select>
 			                    </VBox>

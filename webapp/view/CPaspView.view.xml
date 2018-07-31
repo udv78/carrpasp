@@ -83,6 +83,9 @@
 					<IconTabFilter id="jur" text="{cpaspView>/cjurTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
 					</IconTabFilter>
+					<IconTabFilter id="coords" text="{cpaspView>/coordsTblTitle}">
+						<mvc:XMLView viewName="carrpasp.view.CoordsTbl"/>
+					</IconTabFilter>
 				</items>
 			</IconTabBar>
 		</semantic:content>

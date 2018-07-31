@@ -107,6 +107,22 @@ sap.ui.define([
 											  		cnt=Number((Number(item.PLUSSUM)-Number(item.MINUSSUM))/Number(item.CARGO));
 											  		caption="Прибыль на единицу груза";
 											  	}
+											  	if (mes=="KM") {
+											  		cnt=item.PATHLEN;
+											  		caption="Километраж";
+											  	}
+											  	if (mes=="MINUSKM") {
+											  		cnt=Number(item.MINUSSUM)/Number(item.PATHLEN);
+											  		caption="Расходы на километр";
+											  	}
+											  	if (mes=="PLUSKM") {
+											  		cnt=Number(item.PLUSSUM)/Number(item.PATHLEN);
+											  		caption="Доход на километр";
+											  	}
+											  	if (mes=="PROFITKM") {
+											  		cnt=Number((Number(item.PLUSSUM)-Number(item.MINUSSUM))/Number(item.PATHLEN));
+											  		caption="Прибыль на километр";
+											  	}
 											  	var o={segValName : item.NAME,
 													count : cnt};
 												model.push(o);
