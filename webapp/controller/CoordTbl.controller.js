@@ -86,21 +86,17 @@ sap.ui.define([
 				this.masterId = sObjectId;
 				if (this.getModel()) {
 					this.getModel().metadataLoaded().then( function() {
-						/*var sObjectPath = this.getModel().createKey("CPASP", {
+					   
+					    var sObjectPath = this.getModel().createKey("CPASP", {
 							NUM :  sObjectId
 						});
-						this._bindView("/" + sObjectPath);*/
+						this._bindView("/" + sObjectPath);
+
 					}.bind(this));
 				}
 			},
 
-			/**
-			 * Binds the view to the object path. Makes sure that detail view displays
-			 * a busy indicator while data for the corresponding element binding is loaded.
-			 * @function
-			 * @param {string} sObjectPath path to the object to be bound to the view.
-			 * @private
-			 */
+
 			_bindView : function (sObjectPath) {
 				// Set busy indicator during view binding
 				var oViewModel = this.getModel("coordTbl");
@@ -117,7 +113,7 @@ sap.ui.define([
 						},
 						dataReceived: function () {
 							oViewModel.setProperty("/busy", false);
-						}
+						}.bind(this)
 					}
 				});
 			},
@@ -125,20 +121,41 @@ sap.ui.define([
 			_onBindingChange : function () {
 				var oView = this.getView(),
 					oElementBinding = oView.getElementBinding();
+					var deviceid=this.getModel().getProperty(oElementBinding.getPath()+"/DEVICEID");
+					var ofilter= [new sap.ui.model.Filter("G_DEVICE","EQ",deviceid/*"b87c07bd-7a87-4cfd-8fae-c5027b01faa7"*/)];
 
-				// No data for the binding
-				if (!oElementBinding.getBoundContext()) {
-					this.getRouter().getTargets().display("notFound");
-					// if object could not be found, the selection in the master list
-					// does not make sense anymore.
-					this.getOwnerComponent().oListSelector.clearMasterListSelection();
-					return;
-				}
-
-				var sPath = oElementBinding.getPath();
-
-				this.getOwnerComponent().oListSelector.selectAListItem(sPath);
-
+				    this.getView().byId("coordItemsList").bindAggregation("items",
+			    
+														{path: "/COORDS",
+							                               filters : ofilter,
+							                               
+								                           factory : function (sId, oContext) {   
+							                var attr= new sap.m.ColumnListItem(
+										         {cells : [
+										
+										              new sap.m.Text({
+										
+										                   text : {path: 'G_CREATED', 
+										                			type:'sap.ui.model.type.DateTime', 
+										                			pattern: 'dd.MM.yyyy HH:mm:ss' }
+										
+										              }),
+														new sap.m.ObjectNumber({
+										
+										                   number : { path: 'C_LATITUDE', 
+										                    		type:'sap.ui.model.type.Float'}
+										
+										              }),
+														new sap.m.ObjectNumber({
+										
+										                   number : { path: 'C_LONGITUDE', 
+										                    		type:'sap.ui.model.type.Float'}
+										
+										              })
+										         ]}								                
+							                	);
+							                return attr;
+							}});  					    
 			},
 
 			_onMetadataLoaded : function () {
@@ -159,7 +176,7 @@ sap.ui.define([
 				});
 
 				// Binding the view will set it to not busy - so the view is always busy if it is not bound
-				oViewModel.setProperty("/busy", true);
+				//oViewModel.setProperty("/busy", true);
 				// Restore original busy indicator delay for the detail view
 				oViewModel.setProperty("/delay", iOriginalViewBusyDelay);
 			}

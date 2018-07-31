@@ -65,6 +65,12 @@
 												value="{FACTORYN}"
 												textLabel="{i18n>cpaspFactoryn}"/>
 										</smartform:GroupElement>
+										<smartform:GroupElement>
+											<smartfield:SmartField
+												id="numDeviceid"
+												value="{DEVICEID}"
+												textLabel="{i18n>cpaspDeviceId}"/>
+										</smartform:GroupElement>
 									</smartform:Group>
 								</smartform:SmartForm>
 							</f:content>	
@@ -83,8 +89,8 @@
 					<IconTabFilter id="jur" text="{cpaspView>/cjurTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
 					</IconTabFilter>
-					<IconTabFilter id="coords" text="{cpaspView>/coordsTblTitle}">
-						<mvc:XMLView viewName="carrpasp.view.CoordsTbl"/>
+					<IconTabFilter id="coords" text="{cpaspView>/coordTblTitle}">
+						<mvc:XMLView viewName="carrpasp.view.CoordTbl"/>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>

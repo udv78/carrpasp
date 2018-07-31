@@ -51,6 +51,12 @@
 							value="{FACTORYN}"
 							textLabel="{i18n>cpaspFactoryn}"/>
 					</smartform:GroupElement>
+					<smartform:GroupElement>
+						<smartfield:SmartField
+							id="numDeviceid"
+							value="{DEVICEID}"
+							textLabel="{i18n>cpaspDeviceId}"/>
+					</smartform:GroupElement>
 				</smartform:Group>
 				<smartform:Group
 					id="editsegGroup"
