@@ -21,7 +21,9 @@ sap.ui.define([
 				var oViewModel = new JSONModel({
 					busy : false,
 					delay : 0,
-					lineItemListTitle : this.getResourceBundle().getText("coordTblTitle")
+					lineItemListTitle : this.getResourceBundle().getText("coordTblTitle"),
+					"latitude" : 55.563544,
+					"longitude" : 38.229801
 				});
 
 				this.getRouter().getRoute("cpaspView").attachPatternMatched(this._onObjectMatched, this);
@@ -116,6 +118,9 @@ sap.ui.define([
 						}.bind(this)
 					}
 				});
+				//this.getView().byId("map").setModel(oViewModel);
+				//this.getView().byId("map").bindElement("/coordTbl");
+				debugger;
 			},
 
 			_onBindingChange : function () {
@@ -128,7 +133,7 @@ sap.ui.define([
 			    
 														{path: "/COORDS",
 							                               filters : ofilter,
-							                               
+							                               sorter : [new sap.ui.model.Sorter("G_CREATED",true)],
 								                           factory : function (sId, oContext) {   
 							                var attr= new sap.m.ColumnListItem(
 										         {cells : [
@@ -158,6 +163,8 @@ sap.ui.define([
 							}});  					    
 			},
 
+
+//https://maps.googleapis.com/maps/api/staticmap?zoom=9&size=640x640&center=55.563544,38.229801&markers=55.563544,38.229801&maptype=terrain
 			_onMetadataLoaded : function () {
 				// Store original busy indicator delay for the detail view
 				var iOriginalViewBusyDelay = this.getView().getBusyIndicatorDelay(),

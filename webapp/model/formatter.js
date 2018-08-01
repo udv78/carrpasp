@@ -29,7 +29,17 @@ sap.ui.define([
 					return "Внеплановый ремонт";
 
 				return "";
+			},
+			
+			//https://maps.googleapis.com/maps/api/staticmap?zoom=9&size=640x640&center=55.563544,38.229801&markers=55.563544,38.229801&maptype=terrain
+			formatMapUrl: function(latitude, longitude) {
+				console.log("latitude="+latitude+" longitude="+longitude);
+				/*return "https://maps.googleapis.com/maps/api/staticmap?zoom=9&size=640x640&center="
+					+ jQuery.sap.encodeURL(latitude + "," + longitude)
+					+"&markers="+jQuery.sap.encodeURL(latitude + "," + longitude)+
+					"&maptype=terrain";*/
 			}
+			
 		};
 
 	}

@@ -122,6 +122,25 @@
 			<Annotations Target="CARRPASP.carrpasp.CJURType/OWNNAME">
 				<Annotation Term="Common.Label" String="{@i18n&gt;cjurOwnName}"/>
 			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType">
+				<Annotation Term="Common.Label" String="{@i18n&gt;coordsTblTitle}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType/genid">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType/G_DEVICE">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType/G_CREATED">
+				<Annotation Term="Common.Label" String="{@i18n&gt;coordCreated}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType/C_LONGITUDE">
+				<Annotation Term="Common.Label" String="{@i18n&gt;coordLongitude}"/>
+			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.COORDSType/C_LATITUDE">
+				<Annotation Term="Common.Label" String="{@i18n&gt;coordLatitude}"/>
+			</Annotations>
+
 		</Schema>
 	</edmx:DataServices>
 </edmx:Edmx>

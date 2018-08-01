@@ -49,6 +49,14 @@
 					</ColumnListItem>
 				</items>
 			</Table>
+			<Image id="map" 
+				src="{
+					parts: [
+						'coordTbl>Image>latitude',
+						'coordTbl>Image>longitude'
+					],
+					formatter: '.formatter.formatMapUrl'
+				}" />			
 	</Panel>
 
 </mvc:View>
