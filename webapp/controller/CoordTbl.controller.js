@@ -61,7 +61,7 @@ sap.ui.define([
 						if (items.length>0) {
 							var model = this.getModel();
 							var oFormatDate = sap.ui.core.format.DateFormat.getDateInstance({
-								pattern: "dd.MM.yyyy"
+								pattern: "dd.MM.yyyy HH:mm:ss"
 							});
 							sLastText="Местоположение на "+
 							oFormatDate.format(model.getProperty(items[0].getBindingContext().getPath()+"/G_CREATED"));
