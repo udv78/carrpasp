@@ -38,7 +38,13 @@ sap.ui.define([
 						repairTblTitle : "Ремонты",
 						crunTblTitle : "Пробеги",
 						cjurTblTitle : "Юридическая история",
-						coordTblTitle : "Местоположение"
+						coordTblTitle : "Местоположение",
+						lastJurInfo : "",
+						lastRepairInfo : "",
+						allRunInfo : "",
+						allRunCargo : "",
+						lastCoordText : "",
+						lastCoord : ""
 					});
 
 				this.getRouter().getRoute("cpaspView").attachPatternMatched(this._onObjectMatched, this);
@@ -149,10 +155,11 @@ sap.ui.define([
 						}
 					}
 				});
-				this._fillSegVals();
+			//	this._fillSegVals();
+				this._fillSegVals2();
 			},
 			
-			_fillSegVals : function() { 
+			/*_fillSegVals : function() { 
 				var header=this.getView().byId("cpaspSegValHeader");
 				header.destroyAttributes();
 				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
@@ -168,6 +175,33 @@ sap.ui.define([
 				}});  
 				
 				
+			},*/
+
+			_fillSegVals2 : function() { 
+				var group=this.getView().byId("viewsegGroup");
+				group.destroyGroupElements();
+				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
+				group.bindAggregation("groupElements", {path: "/CPASPVAL",
+				                               parameters: {
+				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
+				                               },
+				                               filters : ofilter,
+				                               sorter : new sap.ui.model.Sorter("VAL_SEGMENT/NAME"),
+					                           factory : function (sId, oContext) {   
+										                var ge=new sap.ui.comp.smartform.GroupElement("gev_"+sId);
+										                var lb = new sap.m.Label('lb_'+sId,{
+										                	text: "{VAL_SEGMENT/NAME}:",
+										                	textAlign: sap.ui.core.TextAlign.End
+										                });
+										                var sf = new sap.ui.comp.smartfield.SmartField('sf_'+sId,{
+										                	value :'{VAL_SEGVAL/NAME}',
+										                	showLabel : false,
+										                	textLabel : 'asdfasdfas'
+										                });
+										                ge.addElement(lb);
+										                ge.addElement(sf);
+						                				return ge;
+				}});  
 			},
 
 			_onBindingChange : function () {

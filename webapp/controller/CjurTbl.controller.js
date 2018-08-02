@@ -46,18 +46,26 @@ sap.ui.define([
 			 * @private
 			 */
 			onListUpdateFinished : function (oEvent) {
-				var sTitle,
+				//debugger;
+				var sTitle, sLast,
 					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("cjurTbl");
+					oViewModel = this.getModel("cjurTbl"),
+					tbl=this.byId("cjurItemsList");
 
 				// only update the counter if the length is final
 				if (this.byId("cjurItemsList").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
 						sTitle = this.getResourceBundle().getText("cjurTblTitleCount", [iTotalItems]);
+						var items=tbl.getItems();
+						if (items.length>0) {
+							sLast=this.getModel().getProperty(items[0].getBindingContext().getPath()+"/OWNNAME");
+						}
 					} else {
 						sTitle = this.getResourceBundle().getText("cjurTblTitleCount", [0]);
+						sLast="Нет данных";
 					}
 					this.getModel("cpaspView").setProperty("/cjurTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/lastJurInfo", sLast);
 
 				}
 			},

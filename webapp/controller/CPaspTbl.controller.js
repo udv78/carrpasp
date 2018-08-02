@@ -100,22 +100,48 @@ sap.ui.define([
 				this.getModel("cpaspView").setProperty("/cpaspTableTitle", sTitle);
 			},
 			
-			/**
-			 * Event handler when a filter tab gets pressed
-			 * @param {sap.ui.base.Event} oEvent the filter tab event
-			 * @public
-			 */
-/*			 onQuickFilter: function(oEvent) {
-			 	var sKey = oEvent.getParameter("key"),
-			 		oFilter = this._mFilters[sKey],
-			 		oTable = this.byId("table"),
-			 		oBinding = oTable.getBinding("items");
-			 	if (oFilter) {
-			 		oBinding.filter(oFilter);
-			 	} else {
-			 		oBinding.filter([]);
-			 	}
-			 },*/
+			onShowCpaspPopover : function (oEvent) {
+				var oPopover = this._getPopover();
+				var oSource = oEvent.getSource();
+				oPopover.bindElement(oSource.getBindingContext().getPath());
+				var content=sap.ui.getCore().byId("popoverContent");
+				var oModel = this.getModel();
+				content.destroyContent();
+				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",oModel.getProperty(oSource.getBindingContext().getPath()+"/NUM"))];
+				content.bindAggregation("content", {path: "/CPASPVAL",
+				                               parameters: {
+				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
+				                               },
+				                               filters : ofilter,
+				                               sorter : new sap.ui.model.Sorter("VAL_SEGMENT/NAME"),
+					                           factory : function (sId, oContext) {   
+										                //var hb = new sap.m.HBox();
+										                var lb = new sap.m.Label('lbpopover_'+sId,{
+										                	text: "{VAL_SEGMENT/NAME}: {VAL_SEGVAL/NAME}"
+										                });
+										                /*var lb2 = new sap.m.Label('lbpopoverval_'+sId,{
+										                	text: "{VAL_SEGVAL/NAME}"
+										                });*/
+										                //hb.addItem(lb);
+										                //hb.addItem(lb2);
+						                				return lb;
+				}});  
+				
+				// open dialog
+				oPopover.openBy(oEvent.getParameter("domRef"));
+			},
+			
+			_getPopover : function () {
+			// create dialog lazily
+				if (!this._oPopover) {
+					// create popover via fragment factory
+					this._oPopover = sap.ui.xmlfragment(
+					"carrpasp.view.CPaspPopover", this);
+					this.getView().addDependent(this._oPopover);
+				}
+				return this._oPopover;
+			},
+			
 
 			/**
 			 * Event handler when a table item gets pressed

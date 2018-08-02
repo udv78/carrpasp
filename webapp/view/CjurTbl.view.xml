@@ -21,7 +21,7 @@
 			<Table
 				id="cjurItemsList"
 				width="auto"
-				items="{PASP_JUR}"
+				items="{path: 'PASP_JUR', sorter: { path: 'DTFROM', descending: true }}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>cjurNoData}"
 				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"

@@ -22,7 +22,7 @@
 			<Table
 				id="repairItemsList"
 				width="auto"
-				items="{PASP_REP}"
+				items="{path: 'PASP_REP' , sorter: { path: 'DT', descending: true }}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>repairNoData}"
 				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"

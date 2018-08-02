@@ -1,0 +1,16 @@
+<core:FragmentDefinition
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		xmlns:core="sap.ui.core">
+	<ResponsivePopover title="{i18n>cpaspSegVals}"
+		resizable = "true"
+		showCloseButton = "true"
+		placement="Bottom"
+		class="sapUiPopupWithPadding">
+		<content>
+			<l:Grid id="popoverContent">
+
+			</l:Grid>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

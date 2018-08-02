@@ -21,7 +21,7 @@
 			<Table
 				id="crunItemsList"
 				width="auto"
-				items="{PASP_RUN}"
+				items="{path: 'PASP_RUN', sorter: { path: 'DT', descending: true }}"
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>crunNoData}"
 				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"

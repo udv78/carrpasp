@@ -48,23 +48,46 @@ sap.ui.define([
 			 * @private
 			 */
 			onListUpdateFinished : function (oEvent) {
-				var sTitle,
+				var sTitle, sLastText, sLastCoord,
 					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("coordTbl");
+					oViewModel = this.getModel("coordTbl"),
+					tbl=this.byId("coordItemsList");
 
 				// only update the counter if the length is final
 				if (this.byId("coordItemsList").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
 						sTitle = this.getResourceBundle().getText("coordsTblTitleCount", [iTotalItems]);
+						var items=tbl.getItems();
+						if (items.length>0) {
+							var model = this.getModel();
+							var oFormatDate = sap.ui.core.format.DateFormat.getDateInstance({
+								pattern: "dd.MM.yyyy"
+							});
+							sLastText="Местоположение на "+
+							oFormatDate.format(model.getProperty(items[0].getBindingContext().getPath()+"/G_CREATED"));
+							sLastCoord=formatter.formatMapUrl(model.getProperty(items[0].getBindingContext().getPath()+"/C_LATITUDE"),
+							model.getProperty(items[0].getBindingContext().getPath()+"/C_LONGITUDE"));
+						}
 					} else {
 						sTitle = this.getResourceBundle().getText("coordsTblTitleCount", [0]);
+						sLastText = "Нет данных о местоположении";
+						sLastCoord = "";
 					}
 					this.getModel("cpaspView").setProperty("/coordTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/lastCoordText", sLastText);
+					this.getModel("cpaspView").setProperty("/lastCoord", sLastCoord);
 				}
 			},
 			
-			onLineSelect : function (oEvent) {
+			onLineItemSelected : function(oEvent) {
+				var oColumnListItem = oEvent.getSource();
+			    var oTable = oColumnListItem.getParent();
+			    oTable.setSelectedItem(oColumnListItem);
+				var coordModel=this.getModel("coordTbl"),
+					model=this.getModel();
 				this.oCurContext = oEvent.getSource().getBindingContext();
+				coordModel.setProperty("/latitude",model.getProperty(this.oCurContext.getPath()+"/C_LATITUDE"));
+				coordModel.setProperty("/longitude",model.getProperty(this.oCurContext.getPath()+"/C_LONGITUDE"));
 			},
 			
 			onFilter: function() {
@@ -120,7 +143,6 @@ sap.ui.define([
 				});
 				//this.getView().byId("map").setModel(oViewModel);
 				//this.getView().byId("map").bindElement("/coordTbl");
-				debugger;
 			},
 
 			_onBindingChange : function () {
@@ -128,7 +150,7 @@ sap.ui.define([
 					oElementBinding = oView.getElementBinding();
 					var deviceid=this.getModel().getProperty(oElementBinding.getPath()+"/DEVICEID");
 					var ofilter= [new sap.ui.model.Filter("G_DEVICE","EQ",deviceid/*"b87c07bd-7a87-4cfd-8fae-c5027b01faa7"*/)];
-
+					var that=this;
 				    this.getView().byId("coordItemsList").bindAggregation("items",
 			    
 														{path: "/COORDS",
@@ -136,7 +158,9 @@ sap.ui.define([
 							                               sorter : [new sap.ui.model.Sorter("G_CREATED",true)],
 								                           factory : function (sId, oContext) {   
 							                var attr= new sap.m.ColumnListItem(
-										         {cells : [
+										         { type : sap.m.ListType.Active,
+										           press : function(oEvent) {that.onLineItemSelected(oEvent);},
+										         	cells : [
 										
 										              new sap.m.Text({
 										

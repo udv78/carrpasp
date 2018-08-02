@@ -21,64 +21,123 @@
 							<Button id="cpaspUpdButton" icon="sap-icon://edit" press="onUpd" tooltip="Изменить паспорт"/>
 							<Button id="cpaspDelButton" icon="sap-icon://delete" press="onDel" tooltip="Удалить паспорт"/>
 						</OverflowToolbar>
-						<f:SimpleForm
-							id="page2">
-							<f:content>
-								<smartform:SmartForm
-									id="form2"
-									editable="false"
-									useHorizontalLayout="true"
-									title="{i18n>cpaspDataTitle}"
-									class="sapUiResponsiveMargin"
-									entityType="/CPASPType">
-									<smartform:Group
-										id="formGroup"
-										label="{i18n>cpaspGeneral}">
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="numField"
-												value="{NUM}"
-												textLabel="{i18n>cpaspNum}"
-												/>
-										</smartform:GroupElement>
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="nameCreateDt"
-												value="{CREATEDT}"
-												textLabel="{i18n>cpaspCreatedt}"/>
-										</smartform:GroupElement>
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="numRegDt"
-												value="{REGDT}"
-												textLabel="{i18n>cpaspRegdt}"/>
-										</smartform:GroupElement>
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="numPrimPrice"
-												value="{PRIMPRICE}"
-												textLabel="{i18n>cpaspPrimeprice}"/>
-										</smartform:GroupElement>
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="numFactoryn"
-												value="{FACTORYN}"
-												textLabel="{i18n>cpaspFactoryn}"/>
-										</smartform:GroupElement>
-										<smartform:GroupElement>
-											<smartfield:SmartField
-												id="numDeviceid"
-												value="{DEVICEID}"
-												textLabel="{i18n>cpaspDeviceId}"/>
-										</smartform:GroupElement>
-									</smartform:Group>
-								</smartform:SmartForm>
-							</f:content>	
+							<f:SimpleForm
+								id="page2">
+								<f:content>
+									<smartform:SmartForm
+										id="form2"
+										editable="false"
+										class="sapUiResponsiveMargin"
+										entityType="/CPASPType">
+										<smartform:Group
+											id="formGroup"
+											label="{i18n>cpaspGeneral}"
+											horizontalLayoutGroupElementMinWidth="500"
+											>
+											<smartform:layout>
+												<l:GridData span="L6 M6 S6" />
+											</smartform:layout>	
+										
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="numField"
+													value="{NUM}"
+													textLabel="{i18n>cpaspNum}"
+													/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="nameCreateDt"
+													value="{CREATEDT}"
+													textLabel="{i18n>cpaspCreatedt}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="numRegDt"
+													value="{REGDT}"
+													textLabel="{i18n>cpaspRegdt}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="numPrimPrice"
+													value="{PRIMPRICE}"
+													textLabel="{i18n>cpaspPrimeprice}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="numFactoryn"
+													value="{FACTORYN}"
+													textLabel="{i18n>cpaspFactoryn}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="numDeviceid"
+													value="{DEVICEID}"
+													textLabel="{i18n>cpaspDeviceId}"/>
+											</smartform:GroupElement>
+										</smartform:Group>
+										<smartform:Group
+											id="viewsegGroup"
+											label="{i18n>cpaspSegVals}"
+											horizontalLayoutGroupElementMinWidth="500">
+											<smartform:layout>
+												<l:GridData span="L6 M6 S6" linebreakS="true"/>
+											</smartform:layout>	
+											<smartform:GroupElement id="viewsegGroupElement">
+											</smartform:GroupElement>
+										</smartform:Group>
+										<smartform:Group
+											id="viewotherGroup"
+											label="{i18n>cpaspOtherData}">
+											<smartform:layout>
+													<l:GridData span="L6 M6 S6" linebreak="true" />
+											</smartform:layout>	
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="lastJurinfo"
+													editable="false"
+													value="{cpaspView>/lastJurInfo}"
+													textLabel="{i18n>lastJurInfo}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="lastRepair"
+													editable="false"
+													value="{cpaspView>/lastRepairInfo}"
+													textLabel="{i18n>lastRepairInfo}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="allRun"
+													editable="false"
+													value="{cpaspView>/allRunInfo}"
+													textLabel="{i18n>allRunInfo}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<smartfield:SmartField
+													id="allRunCargo"
+													editable="false"
+													value="{cpaspView>/allRunCargo}"
+													textLabel="{i18n>allRunCargo}"/>
+											</smartform:GroupElement>
+										</smartform:Group>
+										<smartform:Group
+											id="viewCoordGroup"
+											label="{i18n>cpaspLastCoord}">
+											<smartform:layout>
+													<l:GridData span="L6 M6 S6"/>
+											</smartform:layout>	
+											<smartform:GroupElement>
+												<Label text="{cpaspView>/lastCoordText}"/>
+											</smartform:GroupElement>
+											<smartform:GroupElement>
+												<Image src="{cpaspView>/lastCoord}"/>
+											</smartform:GroupElement>
+
+										</smartform:Group>
+									</smartform:SmartForm>
+								</f:content>	
 							</f:SimpleForm>
-						<ObjectHeader
-							id="cpaspSegValHeader"
-							title="Сегменты">				
-						</ObjectHeader>
 					</IconTabFilter>
 					<IconTabFilter id="repair" text="{cpaspView>/repairTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.RepairTbl"/>
@@ -86,11 +145,11 @@
 					<IconTabFilter id="run" text="{cpaspView>/crunTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CrunTbl"/>
 					</IconTabFilter>
-					<IconTabFilter id="jur" text="{cpaspView>/cjurTblTitle}">
-						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
-					</IconTabFilter>
 					<IconTabFilter id="coords" text="{cpaspView>/coordTblTitle}">
 						<mvc:XMLView viewName="carrpasp.view.CoordTbl"/>
+					</IconTabFilter>
+					<IconTabFilter id="jur" text="{cpaspView>/cjurTblTitle}">
+						<mvc:XMLView viewName="carrpasp.view.CjurTbl"/>
 					</IconTabFilter>
 				</items>
 			</IconTabBar>

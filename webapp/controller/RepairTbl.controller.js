@@ -46,18 +46,32 @@ sap.ui.define([
 			 * @private
 			 */
 			onListUpdateFinished : function (oEvent) {
-				var sTitle,
+				var sTitle, sLast,
 					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("repairTbl");
+					oViewModel = this.getModel("repairTbl"),
+					tbl=this.byId("repairItemsList");
 
 				// only update the counter if the length is final
 				if (this.byId("repairItemsList").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
 						sTitle = this.getResourceBundle().getText("cpaspRepair", [iTotalItems]);
+						var items=tbl.getItems();
+						if (items.length>0) {
+							var model = this.getModel();
+							var oFormatDate = sap.ui.core.format.DateFormat.getDateInstance({
+								pattern: "dd.MM.yyyy"
+							});
+							sLast= formatter.reptypeValue(model.getProperty(items[0].getBindingContext().getPath()+"/REPTYPE")) +
+							" от "+
+							oFormatDate.format(model.getProperty(items[0].getBindingContext().getPath()+"/DT"));
+						}
+						
 					} else {
 						sTitle = this.getResourceBundle().getText("cpaspRepair", [0]);
+						sLast="Нет данных";
 					}
 					this.getModel("cpaspView").setProperty("/repairTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/lastRepairInfo", sLast);
 				}
 			},
 			

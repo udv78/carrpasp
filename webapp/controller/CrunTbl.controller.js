@@ -46,18 +46,38 @@ sap.ui.define([
 			 * @private
 			 */
 			onListUpdateFinished : function (oEvent) {
-				var sTitle,
+				var sTitle, sRun, sCargo,
 					iTotalItems = oEvent.getParameter("total"),
-					oViewModel = this.getModel("crunTbl");
+					oViewModel = this.getModel("crunTbl"),
+					tbl=this.byId("crunItemsList");
 
 				// only update the counter if the length is final
 				if (this.byId("crunItemsList").getBinding("items").isLengthFinal()) {
 					if (iTotalItems) {
 						sTitle = this.getResourceBundle().getText("crunTblTitleCount", [iTotalItems]);
+						var items=tbl.getItems();
+						var km=0;
+						var cargo=0;
+						var model = this.getModel();
+						items.forEach(function(item, i, arr) {
+								km=km+Number(model.getProperty(items[0].getBindingContext().getPath()+"/PATHLEN"));
+								cargo=cargo+Number(model.getProperty(items[0].getBindingContext().getPath()+"/CARGO"));
+							});
+						var oFormat = sap.ui.core.format.NumberFormat.getFloatInstance({
+							maxFractionDigits : 2
+						});
+						if (km>0)
+							sRun= oFormat.format(km)+ " км";
+						if (cargo>0)
+							sCargo= oFormat.format(cargo)+" т";
 					} else {
 						sTitle = this.getResourceBundle().getText("crunTblTitleCount", [0]);
+						sCargo="Нет данных";
+						sRun="Нет данных";
 					}
 					this.getModel("cpaspView").setProperty("/crunTblTitle", sTitle);
+					this.getModel("cpaspView").setProperty("/allRunInfo", sRun);
+					this.getModel("cpaspView").setProperty("/allRunCargo", sCargo);
 				}
 			},
 			
