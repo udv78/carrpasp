@@ -53,7 +53,7 @@
 		        </l:fixContent>
 		    <l:flexContent>			
 				<viz:Popover id="idPopover"> </viz:Popover>
-				<viz:VizFrame id="idViz" uiConfig="{applicationSet:'fiori'}" vizType="vertical_bullet" height="700px" width="100%">
+				<viz:VizFrame id="idViz" uiConfig="{applicationSet:'fiori'}" vizType="vertical_bullet" height="100%" width="100%">
 	                <viz:dataset>
 	                    <viz.data:FlattenedDataset data="{/cpaspchart}">
 	                        <viz.data:dimensions>
