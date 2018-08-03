@@ -155,32 +155,18 @@ sap.ui.define([
 						}
 					}
 				});
-			//	this._fillSegVals();
-				this._fillSegVals2();
+				this._fillSegVals();
 			},
 			
-			/*_fillSegVals : function() { 
-				var header=this.getView().byId("cpaspSegValHeader");
-				header.destroyAttributes();
-				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
-				header.bindAggregation("attributes", {path: "/CPASPVAL",
-				                               parameters: {
-				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
-				                               },
-				                               filters : ofilter,
-				                               sorter : new sap.ui.model.Sorter("VAL_SEGMENT/NAME"),
-					                           factory : function (sId, oContext) {   
-				                var attr= new sap.m.ObjectAttribute("hl_"+sId,{title : "{VAL_SEGMENT/NAME}", text: "{VAL_SEGVAL/NAME}"});
-				                return attr;
-				}});  
-				
-				
-			},*/
-
-			_fillSegVals2 : function() { 
+			_fillSegVals : function() { 
 				var group=this.getView().byId("viewsegGroup");
 				group.destroyGroupElements();
 				var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
+	            var width = this.getView().$().width();
+	            var align=sap.ui.core.TextAlign.End;
+	            if (width<700)
+	            	align=sap.ui.core.TextAlign.Begin;
+				
 				group.bindAggregation("groupElements", {path: "/CPASPVAL",
 				                               parameters: {
 				                               		 expand: 'VAL_SEGMENT,VAL_SEGVAL'
@@ -191,7 +177,7 @@ sap.ui.define([
 										                var ge=new sap.ui.comp.smartform.GroupElement("gev_"+sId);
 										                var lb = new sap.m.Label('lb_'+sId,{
 										                	text: "{VAL_SEGMENT/NAME}:",
-										                	textAlign: sap.ui.core.TextAlign.End
+										                	textAlign: align
 										                });
 										                var sf = new sap.ui.comp.smartfield.SmartField('sf_'+sId,{
 										                	value :'{VAL_SEGVAL/NAME}',

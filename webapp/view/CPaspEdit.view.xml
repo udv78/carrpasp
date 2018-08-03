@@ -3,6 +3,7 @@
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:semantic="sap.m.semantic"
 	xmlns="sap.m"
+	xmlns:l = "sap.ui.layout"
 	xmlns:smartfield="sap.ui.comp.smartfield"
 	xmlns:smartform="sap.ui.comp.smartform">
 	<semantic:FullscreenPage
@@ -20,6 +21,9 @@
 				<smartform:Group
 					id="formGroup"
 					label="{i18n>cpaspGeneral}">
+					<smartform:layout>
+						<l:GridData span="L6 M6 S12"/>
+					</smartform:layout>	
 					<smartform:GroupElement>
 						<smartfield:SmartField
 							id="numField"
@@ -61,6 +65,9 @@
 				<smartform:Group
 					id="editsegGroup"
 					label="{i18n>cpaspSegVals}">
+					<smartform:layout>
+						<l:GridData span="L6 M6 S12" linebreakS="true"/>
+					</smartform:layout>	
 					<smartform:GroupElement id="editsegGroupElement">
 					</smartform:GroupElement>
 				</smartform:Group>

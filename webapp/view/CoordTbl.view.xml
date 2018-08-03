@@ -27,6 +27,7 @@
 					updateFinished="onListUpdateFinished"
 					noDataText="{i18n>repairNoData}"
 					busyIndicatorDelay="{coordTbl>/lineItemTableDelay}"
+					growing="true" growingScrollToLoad="true"
 					class="sapUiResponsiveMargin"
 					>
 					
@@ -53,6 +54,7 @@
 				</Table>
 			</Panel>
 			<Image id="map" 
+			    class="sapUiHideOnPhone sapUiHideOnTablet"
 				src="{
 					parts: [
 						'coordTbl>/latitude',

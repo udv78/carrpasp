@@ -25,6 +25,7 @@
 				updateFinished="onListUpdateFinished"
 				noDataText="{i18n>cjurNoData}"
 				busyIndicatorDelay="{crunTbl>/lineItemTableDelay}"
+				growing="true" growingScrollToLoad="true"
 				class="sapUiResponsiveMargin"
 				>
 				

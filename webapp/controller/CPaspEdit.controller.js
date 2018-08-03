@@ -164,6 +164,11 @@ sap.ui.define([
  		    var group = that.getView().byId("editsegGroup");
  		    var oView=that.getView();
  		    oView.segvals=[];
+            var width = this.getView().$().width();
+            var align=sap.ui.core.TextAlign.End;
+            if (width<500)
+            	align=sap.ui.core.TextAlign.Begin;
+ 		    
 			oModel.read("/SEGMENT", {
 									sorters : [new sap.ui.model.Sorter("NAME")],
 									success : function(oData) {
@@ -189,7 +194,7 @@ sap.ui.define([
 											ge.setBindingContext(oCurContext);
 
 												
-							                var lb = new sap.m.Label('lb_'+item.ID,{text: "{NAME}"});
+							                var lb = new sap.m.Label('lb_'+item.ID,{text: "{NAME}", textAlign: align});
 							                lb.bindElement({path:"/SEGMENT("+item.ID+")",
 							                						events: {
 												        					dataReceived: function(rData) {
@@ -280,6 +285,10 @@ sap.ui.define([
 			var ofilter= [new sap.ui.model.Filter("CPASPNUM","EQ",this.Num)];
 			var that = this;
 			var oModel=this.getModel();
+            var width = this.getView().$().width();
+            var align=sap.ui.core.TextAlign.End;
+            if (width<500)
+            	align=sap.ui.core.TextAlign.Begin;
 			//debugger;
 			oModel.read("/CPASPVAL", {
 						parameters: {
@@ -298,7 +307,7 @@ sap.ui.define([
 				                var ge=new sap.ui.comp.smartform.GroupElement("ge_"+sId);
 				                ge.bindElement({path:"/CPASPVAL("+item.ID+"L)"
 				                						});
-				                var lb = new sap.m.Label('lb_'+sId,{text: "{NAME}"});
+				                var lb = new sap.m.Label('lb_'+sId,{text: "{NAME}", textAlign: align});
 				                lb.bindElement({path:"/CPASPVAL("+item.ID+")/VAL_SEGMENT",
 				                						events: {
 									        					dataReceived: function(rData) {

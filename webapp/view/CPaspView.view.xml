@@ -35,7 +35,7 @@
 											horizontalLayoutGroupElementMinWidth="500"
 											>
 											<smartform:layout>
-												<l:GridData span="L6 M6 S6" />
+												<l:GridData span="L6 M6 S12" />
 											</smartform:layout>	
 										
 											<smartform:GroupElement>
@@ -81,16 +81,17 @@
 											label="{i18n>cpaspSegVals}"
 											horizontalLayoutGroupElementMinWidth="500">
 											<smartform:layout>
-												<l:GridData span="L6 M6 S6" linebreakS="true"/>
+												<l:GridData span="L6 M6 S12" linebreakS="true"/>
 											</smartform:layout>	
 											<smartform:GroupElement id="viewsegGroupElement">
 											</smartform:GroupElement>
 										</smartform:Group>
 										<smartform:Group
 											id="viewotherGroup"
-											label="{i18n>cpaspOtherData}">
+											label="{i18n>cpaspOtherData}"
+											horizontalLayoutGroupElementMinWidth="500">
 											<smartform:layout>
-													<l:GridData span="L6 M6 S6" linebreak="true" />
+													<l:GridData span="L6 M6 S12" linebreak="true" />
 											</smartform:layout>	
 											<smartform:GroupElement>
 												<smartfield:SmartField
@@ -123,9 +124,10 @@
 										</smartform:Group>
 										<smartform:Group
 											id="viewCoordGroup"
-											label="{i18n>cpaspLastCoord}">
+											label="{i18n>cpaspLastCoord}"
+											horizontalLayoutGroupElementMinWidth="500">
 											<smartform:layout>
-													<l:GridData span="L6 M6 S6"/>
+													<l:GridData span="L6 M6 S12"  linebreakS="true"/>
 											</smartform:layout>	
 											<smartform:GroupElement>
 												<Label text="{cpaspView>/lastCoordText}"/>

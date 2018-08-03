@@ -36,10 +36,10 @@
 				<Column id="regdtColumn" demandPopin="false" minScreenWidth="Tablet">
 					<Text text="{i18n>cpaspRegdt}"/>
 				</Column>
-				<Column id="primepriceColumn" hAlign="End">
+				<Column id="primepriceColumn" hAlign="End" demandPopin="false" minScreenWidth="Tablet">
 					<Text text="{i18n>cpaspPrimeprice}"/>
 				</Column>
-				<Column id="factorynColumn" hAlign="End">
+				<Column id="factorynColumn" hAlign="End" demandPopin="false" minScreenWidth="Tablet">
 					<Text text="{i18n>cpaspFactoryn}"/>
 				</Column>
 			</columns>
