@@ -10,6 +10,9 @@ sap.ui.define(["carrpasp/controller/BaseController",
 		},
 		pressSegment : function(evt) {
 				this.getRouter().navTo("Segmentapp");
+		},
+		pressImport : function(evt) {
+				this.getRouter().navTo("ImportFromFile");
 		}
 		
 	});

@@ -1,0 +1,34 @@
+<mvc:View
+    xmlns="sap.m" 
+    xmlns:mvc="sap.ui.core.mvc" 
+    xmlns:semantic="sap.m.semantic"
+    xmlns:l="sap.ui.layout"
+   	xmlns:u="sap.ui.unified"
+	controllerName="carrpasp.controller.ImportFromFile">
+	<semantic:FullscreenPage id="page" 
+	          semanticRuleSet="Optimized" 
+	          title="{i18n>importFromFileTitle}"
+	          navButtonPress="onNavBack"
+			  showNavButton="true">
+		<semantic:content>
+			<l:VerticalLayout>
+				<u:FileUploader
+				id="fileUploader"
+				name="myFileUpload"
+				fileType="csv"
+				tooltip="загрузить данные из файла"
+				uploadComplete="handleUploadComplete"/>
+				<Button
+					text="Загрузить данные"
+					press="handleUploadPress"/>
+				<TextArea 
+				    id="textArea"
+					value="" 
+					rows="20"
+					cols="100"/>	
+			</l:VerticalLayout>
+	
+		
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

@@ -178,6 +178,13 @@
 					"target": [
 						"cpaspChart"
 					]
+				},
+				{
+					"pattern": "ImportFromFile",
+					"name": "ImportFromFile",
+					"target": [
+						"ImportFromFile"
+					]
 				}
 			],
 			"targets": {
@@ -247,6 +254,11 @@
 					"viewName": "CPaspChart",
 					"viewId": "CPaspChart",
 					"viewLevel": 2
+				},
+				"ImportFromFile": {
+					"viewName": "ImportFromFile",
+					"viewLevel": 1,
+					"viewId": "ImportFromFile"
 				}
 			}
 		}

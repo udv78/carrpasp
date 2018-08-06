@@ -24,4 +24,15 @@
 			</TileContent>
 		</tileContent>
 	</GenericTile>
+
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Импорт данных"
+		subheader="Импорт из файла" press="pressImport" >
+		<tileContent>
+			<TileContent>
+				<content>
+					<ImageContent src="sap-icon://excel-attachment" />
+				</content>
+			</TileContent>
+		</tileContent>
+	</GenericTile>
 	</Page></mvc:View>
