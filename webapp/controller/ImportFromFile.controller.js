@@ -193,8 +193,9 @@ sap.ui.define([
                         }
                         
 
-                        function OnSavePass(k, num) {
+                        function OnSavePass(k, num, crt) {
                             writeLog("Записан паспорт вагона с номером " + num);
+                            if (crt) {arrNum.push(num); }
                             oDataModel.read("/CPASPVAL", {
                                 filters : [new sap.ui.model.Filter("CPASPNUM","EQ",num)],
                                 success : function(oData) {
@@ -205,7 +206,7 @@ sap.ui.define([
                                               oDataModel.remove("/CPASPVAL(" + item.ID + ")",oProperties,{
                                                 groupId: "deleteGroup",
 //                                                success: function(oData1) {console.log("Удален сегмент "); },
-                                                error: function(response) {writeLog("Ошибка при удалении сегмента паспорта вагона Номер " + num + "     " + response); }
+                                                error: function(err) {writeLog("Ошибка при удалении сегмента паспорта вагона Номер " + num + "     " +err.responseText); }
                                             });
                                         });
                                     }    
@@ -229,7 +230,7 @@ sap.ui.define([
                                         oDataModel.create("/CPASPVAL",oProperties,
                                             {
                                                 groupId: "segsGroup",    
-                                                error: function(response) {writeLog("Ошибка при записи сегмента паспорта вагона Номер" + num + "     " + response); }
+                                                error: function(err) {writeLog("Ошибка при записи сегмента паспорта вагона Номер " + num + "     " + err.responseText); }
                                             });  
                                     }    
                                 }
@@ -250,15 +251,15 @@ sap.ui.define([
                             if (iExists === -1) {
                                 oDataModel.create("/CPASP",oProperties,{
                                             groupId: "createGroup",
-                                            success: OnSavePass(i, oProperties.NUM),
-                                            error: function(response) {writeLog("Ошибка при записи нового паспорта вагона Номер " +  oProperties.NUM + "  " + response); }
+                                            success: OnSavePass(i, oProperties.NUM, true),
+                                            error: function(err) {writeLog("Ошибка при записи нового паспорта вагона Номер "  + oProperties.NUM + "     " +  err.responseText); }
                                             });
                             }
                             else {
                                 oDataModel.update("/CPASP('" + oProperties.NUM + "')",oProperties,{
                                             groupId: "createGroup",
-                                            success: OnSavePass(i, oProperties.NUM),
-                                            error: function(response) {writeLog("Ошибка при обновлении паспорта вагона Номер " +  oProperties.NUM + "  " + response); }
+                                            success: OnSavePass(i, oProperties.NUM, false),
+                                            error: function(err) {writeLog("Ошибка при обновлении паспорта вагона Номер "  + oProperties.NUM + "     " + err.responseText); }
                                             });
                             }
                         }
