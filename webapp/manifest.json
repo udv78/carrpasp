@@ -130,6 +130,7 @@
 				},
 				{
 					"pattern": "Segmentapp",
+					"controlId": "idAppControl",
 					"name": "Segmentapp",
 					"target": [
 						"Segmentapp"
@@ -137,6 +138,8 @@
 				},
 				{
 					"pattern": "segmentTbl",
+					"controlId": "idAppControl",
+					"targetControl": "idAppControl",
 					"name": "segmentTbl",
 					"target": [
 						"segmentTbl",
@@ -145,6 +148,8 @@
 				},
 				{
 					"pattern": "SEGMENT/{objectId}",
+					"controlId": "idAppControl",
+					"targetControl": "idAppControl",
 					"name": "segvalTbl",
 					"target": [
 						"segmentTbl",
@@ -200,12 +205,14 @@
 					"viewId": "Segmentapp"
 				},
 				"segmentTbl": {
+					"parent" :  "Segmentapp",
 					"viewName": "SegmentTbl",
 					"viewLevel": 2,
 					"viewId": "segmentTbl",
 					"controlAggregation": "masterPages"
 				},
 				"segvalTbl": {
+					"parent" :  "Segmentapp",
 					"viewName": "SegvalTbl",
 					"viewId": "segvalTbl",
 					"viewLevel": 3,

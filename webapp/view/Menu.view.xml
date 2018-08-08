@@ -8,7 +8,7 @@
 		<tileContent>
 			<TileContent>
 				<content>
-					<ImageContent src="sap-icon://passenger-train" />
+					<NumericContent id="cpasptile" value="{path : '/CPASP/$count' , formatter: '.formatCPaspTile'}" icon="sap-icon://passenger-train"  />
 				</content>
 			</TileContent>
 		</tileContent>
@@ -19,7 +19,7 @@
 		<tileContent>
 			<TileContent>
 				<content>
-					<ImageContent src="sap-icon://database" />
+					<NumericContent id="csegmenttile" value="{path : '/SEGMENT/$count' , formatter: '.formatSegmentTile'}" icon="sap-icon://database"  />
 				</content>
 			</TileContent>
 		</tileContent>
