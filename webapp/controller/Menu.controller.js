@@ -9,7 +9,7 @@ sap.ui.define(["carrpasp/controller/BaseController",
 				this.getRouter().navTo("cpaspTbl");
 		},
 		pressSegment : function(evt) {
-				this.getRouter().navTo("segmentTbl");
+				this.getRouter().navTo("Segmentapp");
 		},
 		pressImport : function(evt) {
 				this.getRouter().navTo("ImportFromFile");
