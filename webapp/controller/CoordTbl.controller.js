@@ -67,11 +67,13 @@ sap.ui.define([
 							oFormatDate.format(model.getProperty(items[0].getBindingContext().getPath()+"/G_CREATED"));
 							sLastCoord=formatter.formatMapUrl(model.getProperty(items[0].getBindingContext().getPath()+"/C_LATITUDE"),
 							model.getProperty(items[0].getBindingContext().getPath()+"/C_LONGITUDE"));
+							this.byId("map").setVisible(true);
 						}
 					} else {
 						sTitle = this.getResourceBundle().getText("coordsTblTitleCount", [0]);
 						sLastText = "Нет данных о местоположении";
 						sLastCoord = "";
+						this.byId("map").setVisible(false);
 					}
 					this.getModel("cpaspView").setProperty("/coordTblTitle", sTitle);
 					this.getModel("cpaspView").setProperty("/lastCoordText", sLastText);

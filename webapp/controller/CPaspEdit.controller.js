@@ -211,7 +211,7 @@ sap.ui.define([
 			                							}
 
 							                });
-							                attr.bindElement({path:"/CPASPVAL("+oProperties.ID+"L)",
+							                attr.bindElement({path:oCurContext.getPath()/*"/CPASPVAL("+oProperties.ID+"L)"*/,
 							                						events: {
 												        					dataReceived: function(rData) {
 												        						attr.bindProperty("value",{path: "SEGVALID"});	

@@ -25,7 +25,7 @@
 					width="auto"
 					items="{/COORDS}"
 					updateFinished="onListUpdateFinished"
-					noDataText="{i18n>repairNoData}"
+					noDataText="{i18n>coordsNoData}"
 					busyIndicatorDelay="{coordTbl>/lineItemTableDelay}"
 					growing="true" growingScrollToLoad="true"
 					class="sapUiResponsiveMargin"

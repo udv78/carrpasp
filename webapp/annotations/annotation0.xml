@@ -62,6 +62,9 @@
 			<Annotations Target="CARRPASP.carrpasp.CPASPType/REGDT">
 				<Annotation Term="Common.Label" String="{@i18n&gt;cpaspRegdt}"/>
 			</Annotations>
+			<Annotations Target="CARRPASP.carrpasp.CPASPType/DEVICEID">
+				<Annotation Term="Common.Label" String="{@i18n&gt;cpaspDeviceId}"/>
+			</Annotations>
 			<Annotations Target="CARRPASP.carrpasp.REPAIRSType/CNUM">
 				<Annotation Term="UI.HiddenFilter"/>
 			</Annotations>
