@@ -207,7 +207,7 @@ sap.ui.define([
 			                							valueHelpOnly : true,
 			                							textFormatMode : "Key",
 			                							valueHelpRequest : function(oEvent) { 
-			                								that.handleValueHelp(oEvent,that);
+			                								that.handleValueHelp(oEvent,that); 
 			                							}
 
 							                });
